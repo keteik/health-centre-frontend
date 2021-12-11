@@ -1,0 +1,9 @@
+.main-div mat-card {
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.login-form {
+    padding: 10px;
+    font-size: 20px;
+}

@@ -6,16 +6,17 @@ import { HttpClient} from '@angular/common/http';
 })
 export class AuthService {
 
-  loggedInStatus: boolean = false;
+  loggedInStatus: boolean = JSON.parse(localStorage.getItem('loggedIn') || 'false');
 
   constructor(private http: HttpClient) { }
 
   setisLoggedIn(value: boolean) {
     this.loggedInStatus = value;
+    localStorage.setItem('loggedIn', 'true');
   }
 
   get isLoggedIn() {
-    return this.loggedInStatus;
+    return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString());
   }
 
   getUserDetails(email: string, password: string) {

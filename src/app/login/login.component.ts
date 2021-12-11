@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,27 +10,35 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private Auth: AuthService, private router: Router) { }
+  //public loginForm: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private Auth: AuthService, private router: Router) {}
+
+  public loginForm = new FormGroup({
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  })
+
+  ngOnInit():  void {
   }
 
-  loginUser(event: any){
-    event.preventDefault();
-    const target = event.target;
-    const email = target.querySelector('#email').value;
-    const password = target.querySelector('#password').value;
+  onLogin() {
+    const email = this.loginForm.controls.email.value;
+    const password = this.loginForm.controls.password.value;
 
     this.Auth.getUserDetails(email, password).subscribe((data: any) => {
       if(data.id){
-        console.log(data);
-        this.router.navigate(['patient']);
+        localStorage.setItem('role', data.role);
+        this.router.navigate([data.role]);
         this.Auth.setisLoggedIn(true);
       }
       else{
-       window.alert(data);
+       window.alert(data.message);
       }
     });
   }
+
+ 
+
 
 }
