@@ -49,7 +49,8 @@ import { MatIconModule } from '@angular/material/icon';
     RouterModule.forRoot([
       {
         path: '',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [LoginGuard]
       },
       {
         path: 'login',

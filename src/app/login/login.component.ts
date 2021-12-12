@@ -10,8 +10,6 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  //public loginForm: FormGroup;
-
   constructor(private Auth: AuthService, private router: Router) {}
 
   public loginForm = new FormGroup({
@@ -38,7 +36,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
- 
+ onHome() {
+   this.router.navigate(['/']);
+ }
 
 
 }

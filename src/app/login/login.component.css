@@ -7,3 +7,7 @@
     padding: 10px;
     font-size: 20px;
 }
+
+.ref-element {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,2 +1,22 @@
-<h1>Health Centre</h1>
-<a href="/login">Login</a>
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button aria-label="Example icon-button with home icon" class="ref-element">
+        <mat-icon style="line-height: 20px;">home</mat-icon>
+        Przychodnia zdrowia
+      </button>
+      <span class="example-spacer"></span>
+
+      <div class="flex-item" fxFlex fxLayoutAlign="end start">
+        <mat-nav-list fxLayout="row">
+          <button mat-button mat-list-item (click)="onLogin()" class="ref-element" style="margin-left: auto;">
+            Login
+          </button>
+          <button mat-button mat-list-item (click)="onRegister()" class="ref-element">
+            Register
+          </button>
+        </mat-nav-list>
+      </div>
+
+    </mat-toolbar>
+  </p>
+<router-outlet></router-outlet>
