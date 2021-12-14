@@ -1,22 +1,27 @@
-<p>
-    <mat-toolbar color="primary">
-      <button mat-icon-button aria-label="Example icon-button with home icon" class="ref-element">
-        <mat-icon style="line-height: 20px;">home</mat-icon>
-        Przychodnia zdrowia
-      </button>
-      <span class="example-spacer"></span>
+  <body style="background-color: #e6e6e6;">
+    <p>
+      <mat-toolbar color="primary">
+        <button mat-icon-button aria-label="Example icon-button with home icon" class="ref-element">
+          <mat-icon style="line-height: 20px;">home</mat-icon>
+          Przychodnia zdrowia
+        </button>
+        <span class="example-spacer"></span>
+  
+        <div class="flex-item" fxFlex fxLayoutAlign="end start">
+          <mat-nav-list fxLayout="row">
+            <button mat-button mat-list-item (click)="onLogin()" class="ref-element" style="margin-left: auto;">
+              Logowanie
+            </button>
+            <button mat-button mat-list-item (click)="onRegister()" class="ref-element">
+              Rejestracja
+            </button>
+          </mat-nav-list>
+        </div>
+  
+      </mat-toolbar>
+    </p>
+  </body>
+  
+  
 
-      <div class="flex-item" fxFlex fxLayoutAlign="end start">
-        <mat-nav-list fxLayout="row">
-          <button mat-button mat-list-item (click)="onLogin()" class="ref-element" style="margin-left: auto;">
-            Logowanie
-          </button>
-          <button mat-button mat-list-item (click)="onRegister()" class="ref-element">
-            Rejestracja
-          </button>
-        </mat-nav-list>
-      </div>
-
-    </mat-toolbar>
-  </p>
 <router-outlet></router-outlet>

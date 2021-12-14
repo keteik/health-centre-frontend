@@ -27,36 +27,37 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister() {
-    const name = this.registerForm.controls.name.value;
-    const surname = this.registerForm.controls.surname.value;
-    const email = this.registerForm.controls.email.value;
-    const password = this.registerForm.controls.password.value;
-    const role = "patient";
-    const phone = this.registerForm.controls.phone.value;
-    const pesel = this.registerForm.controls.pesel.value;
-    const age = this.registerForm.controls.age.value;
-    const gender = this.registerForm.controls.gender.value;
+    if(this.registerForm.status !== "INVALID"){
 
-    console.log(gender);
+      const name = this.registerForm.controls.name.value;
+      const surname = this.registerForm.controls.surname.value;
+      const email = this.registerForm.controls.email.value;
+      const password = this.registerForm.controls.password.value;
+      const role = "patient";
+      const phone = this.registerForm.controls.phone.value;
+      const pesel = this.registerForm.controls.pesel.value;
+      const age = this.registerForm.controls.age.value;
+      const gender = this.registerForm.controls.gender.value;
 
-  this.http.post('http://localhost:5000/register', {
-    name,
-    surname,
-    email,
-    password,
-    role,
-    phone,
-    pesel,
-    age,
-    gender
-    }).subscribe((data: any) => {
-    if(data.id){
-      this.router.navigate(['login']);
-    }else{
-      window.alert(data.message);
+      this.http.post('http://localhost:5000/register', {
+        name,
+        surname,
+        email,
+        password,
+        role,
+        phone,
+        pesel,
+        age,
+        gender
+      }).subscribe((data: any) => {
+        if(data.id){
+          this.router.navigate(['login']);
+        }else{
+          window.alert(data.message);
+        }
+
+      });
     }
-
-    });
 }
 
   onHome() {

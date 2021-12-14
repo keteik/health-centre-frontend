@@ -1,28 +1,31 @@
-<p style=>
-    <mat-toolbar color="primary">
-      <button mat-icon-button (click)="onHome()" aria-label="Example icon-button with home icon" class="ref-element">
-        <mat-icon style="line-height: 20px;">home</mat-icon>
-        Przychodnia zdrowia
-      </button>
-      <span class="example-spacer"></span>
-    </mat-toolbar>
-</p>
-<div fxLayoutAlign="center center" fxFlexFill class="main-div">
-    <mat-card fxFlex="350px" style="padding: auto;">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" style="position: absolute; left: 50%;">
-            home
-        </mat-icon>
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" fxLayoutAlign="streatch" fxLayout="column" class="login-form">
-            <mat-form-field>
-                <input matInput placeholder="Email" type="email" formControlName="email" class="login-form" required>
-            </mat-form-field>
-            <mat-form-field >
-                <input matInput placeholder="Password" type="password" formControlName="password" class="login-form" required>
-            </mat-form-field>
-            <button mat-raised-button class="login-form" color="primary">
-                Zaloguj się
-            </button>
-        </form>
-    </mat-card>
-</div>
+<body style="background-color: #e6e6e6; overflow: hidden;">
+    <p style=>
+        <mat-toolbar color="primary">
+          <button mat-icon-button (click)="onHome()" aria-label="Example icon-button with home icon" class="ref-element">
+            <mat-icon style="line-height: 20px;">home</mat-icon>
+            Przychodnia zdrowia
+          </button>
+          <span class="example-spacer"></span>
+        </mat-toolbar>
+    </p>
+    <div fxLayoutAlign="center center" fxFlexFill class="main-div">
+        <mat-card fxFlex="350px" style="padding: auto;">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" style="position: absolute; left: 50%;">
+                home
+            </mat-icon>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()" fxLayoutAlign="streatch" fxLayout="column" class="login-form">
+                <mat-form-field>
+                    <input matInput placeholder="Email" type="email" formControlName="email" class="login-form" required>
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput placeholder="Password" type="password" formControlName="password" class="login-form" required>
+                </mat-form-field>
+                <button mat-raised-button class="login-form" color="primary">
+                    Zaloguj się
+                </button>
+            </form>
+        </mat-card>
+    </div>
+    
+</body>
 
