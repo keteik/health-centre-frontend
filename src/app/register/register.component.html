@@ -1,0 +1,47 @@
+<p style=>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="onHome()" aria-label="Example icon-button with home icon" class="ref-element">
+        <mat-icon style="line-height: 20px;">home</mat-icon>
+        Przychodnia zdrowia
+      </button>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+</p>
+<div fxLayoutAlign="center center" fxFlexFill class="main-div">
+    <mat-card fxFlex="350px" style="padding: auto;">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" style="position: absolute; left: 50%;">
+            home
+        </mat-icon>
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()" fxLayoutAlign="streatch" fxLayout="column" class="login-form">
+            <mat-form-field>
+                <input matInput placeholder="Imię" type="text" formControlName="name" class="login-form" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Nazwisko" type="text" formControlName="surname" class="login-form" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Email" type="mail" formControlName="email" class="login-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Hasło" type="password" formControlName="password" class="login-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Telefon" type="number" formControlName="phone" class="login-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Pesel" type="number" formControlName="pesel" class="login-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Wiek" type="number" formControlName="age" class="login-form" required>
+            </mat-form-field>
+            <mat-radio-group aria-label="Select an option" formControlName="gender" class="login-form" style="padding-bottom: 20px;">
+                <mat-radio-button value="male" >Mężczyzna</mat-radio-button>
+                <mat-radio-button value="female" style="margin-left: 10px;">Kobieta</mat-radio-button>
+            </mat-radio-group>
+            <button mat-raised-button class="login-form" color="primary">
+                Zarejestruj się
+            </button>
+        </form>
+    </mat-card>
+</div>
+

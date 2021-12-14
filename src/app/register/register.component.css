@@ -1,0 +1,13 @@
+.main-div mat-card {
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.login-form {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.ref-element {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}

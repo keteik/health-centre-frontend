@@ -13,6 +13,7 @@ import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterComponent } from './register/register.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,6 +23,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -31,9 +34,11 @@ import { MatIconModule } from '@angular/material/icon';
     LoginComponent,
     PatientComponent,
     HomeComponent,
-    DoctorComponent
+    DoctorComponent,
+    RegisterComponent
   ],
   imports: [
+    MatRadioModule,
     MatIconModule,
     ReactiveFormsModule,
     MatToolbarModule,
@@ -58,6 +63,11 @@ import { MatIconModule } from '@angular/material/icon';
         canActivate: [LoginGuard]
       },
       {
+        path: 'register',
+        component: RegisterComponent,
+        canActivate: [LoginGuard]
+      },
+      {
         path: 'patient',
         component: PatientComponent,
         canActivate: [AuthGuard]
@@ -66,6 +76,10 @@ import { MatIconModule } from '@angular/material/icon';
         path: 'doctor',
         component: DoctorComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent
       }
     ]),
     BrowserAnimationsModule
