@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  setisLoggedIn(value: boolean) {
+  setIsLoggedIn(value: boolean) {
     this.loggedInStatus = value;
     localStorage.setItem('loggedIn', 'true');
   }

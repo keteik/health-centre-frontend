@@ -1,1 +1,37 @@
-<p>patient works!</p>
+<body style="background-color: #e6e6e6;">
+    <p>
+      <mat-toolbar color="primary" class="first-tool-bar">  
+        <div class="flex-item">
+              <mat-nav-list fxLayout="row">
+                <button mat-button mat-list-item class="ref-element" style="margin-left: auto; margin-top: 5%; border: solid 2px; border-radius: 20px;">
+                    Moje wizyty
+                </button>
+                <button mat-button mat-list-item class="ref-element" style="margin-left: auto; margin-top: 5%; border: solid 2px; border-radius: 20px; margin-left: 20px;">
+                     Moje recepty
+                </button>   
+              </mat-nav-list>
+        </div>
+        <div class="flex-item" fxFlex fxLayoutAlign="end start" style="margin-top: 7px;">
+            <mat-accordion >
+                <mat-expansion-panel hideToggle style="background-color: #283593">
+                    <mat-expansion-panel-header >
+                      <mat-panel-title class="ref-element" style="margin-right: 0; color: white; " >
+                        {{userName}}
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <button mat-button mat-list-item (click)="onLogOut()" class="ref-element" style="margin-left: auto; color: white; ">
+                        Wyloguj się
+                      </button>
+                  </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+  
+      </mat-toolbar>
+    </p> 
+  </body>
+  
+  
+  
+<router-outlet></router-outlet>
+
+<p>Patient</p>

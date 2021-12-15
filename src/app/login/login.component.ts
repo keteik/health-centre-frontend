@@ -27,8 +27,10 @@ export class LoginComponent implements OnInit {
     this.Auth.getUserDetails(email, password).subscribe((data: any) => {
       if(data.id){
         localStorage.setItem('role', data.role);
+        localStorage.setItem('name', data.name);
+        localStorage.setItem('surname', data.surname);
         this.router.navigate([data.role]);
-        this.Auth.setisLoggedIn(true);
+        this.Auth.setIsLoggedIn(true);
       }
       else{
        window.alert(data.message);

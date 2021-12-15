@@ -25,7 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -38,6 +38,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     RegisterComponent
   ],
   imports: [
+    MatExpansionModule,
     MatRadioModule,
     MatIconModule,
     ReactiveFormsModule,

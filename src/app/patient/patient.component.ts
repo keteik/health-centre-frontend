@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientComponent implements OnInit {
 
-  constructor() { }
+  public userName: any = localStorage.getItem('name') + " " + localStorage.getItem('surname');
+
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  onLogOut() {
+    localStorage.clear();
+    window.location.reload();
   }
 
 }
