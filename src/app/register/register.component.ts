@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
       const pesel = this.registerForm.controls.pesel.value;
       const age = this.registerForm.controls.age.value;
       const gender = this.registerForm.controls.gender.value;
-
+ 
       this.http.post('http://localhost:5000/register', {
         name,
         surname,
