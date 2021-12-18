@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     if(this.registerForm.status !== "INVALID"){
-
       const name = this.registerForm.controls.name.value;
       const surname = this.registerForm.controls.surname.value;
       const email = this.registerForm.controls.email.value;
@@ -50,13 +49,15 @@ export class RegisterComponent implements OnInit {
         age,
         gender
       }).subscribe((data: any) => {
-        if(data.id){
-          this.router.navigate(['login']);
-        }else{
-          window.alert(data.message);
-        }
+          if(data.id) {
+            this.router.navigate(['login']);
+          } else {
+            window.alert(data.message);
+          }
+        });
 
-      });
+    } else {
+      window.alert("Fill all fields");
     }
 }
 
