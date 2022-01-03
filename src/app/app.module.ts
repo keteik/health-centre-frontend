@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table'  
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     RegisterComponent
   ],
   imports: [
+    MatTableModule,
     MatExpansionModule,
     MatRadioModule,
     MatIconModule,

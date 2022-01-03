@@ -20,3 +20,7 @@
   button:hover {
       background: #536DFE;
   }
+
+  table {
+      width: 100%;
+  }
