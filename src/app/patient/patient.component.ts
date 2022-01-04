@@ -3,12 +3,18 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DataStreamService } from '../services/data-stream.service';
 
-type PeriodicElement = {
+type Visit = {
   date: Date;
   id: number;
   room: number;
   status: number;
+  doctor: {
+    name: string;
+    surname: string;
+  }
+  doctorName: string;
 }
+
 
 @Component({
   selector: 'app-patient',
@@ -23,8 +29,9 @@ export class PatientComponent implements OnInit {
   loadVisit = false;
   loadPrescription = false;
 
-  dataSource: PeriodicElement[] = [];
-  displayedColumns: string[] = ['id', 'date', 'room'];
+  dataVisit: Visit[] = [];
+
+  displayedColumns: string[] = ['id', 'date', 'room', 'doctor'];
 
 
   constructor(private router: Router, private http: HttpClient, private dataStream: DataStreamService) { }
@@ -47,9 +54,11 @@ export class PatientComponent implements OnInit {
     const url = "http://localhost:5000/visits/" + localStorage.getItem('id');
 
     this.dataStream.getVisitPatient(url).subscribe(results => {
-      this.dataSource = results;
+      this.dataVisit = results;
       this.loadVisit = true;
     })
+
+
   }
 
   onPrescription() {

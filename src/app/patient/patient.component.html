@@ -30,7 +30,7 @@
     </p> 
 
     <div *ngIf="loadVisit">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataVisit" class="mat-elevation-z8">
         
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -45,6 +45,11 @@
         <ng-container matColumnDef="room">
           <th mat-header-cell *matHeaderCellDef> Gabinet </th>
           <td mat-cell *matCellDef="let element"> {{element.room}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="doctor">
+          <th mat-header-cell *matHeaderCellDef> Lekarz </th>
+          <td mat-cell *matCellDef="let element"> {{element.doctor.name + " " + element.doctor.surname}} </td>
         </ng-container>
         
 
