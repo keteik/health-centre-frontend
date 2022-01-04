@@ -27,6 +27,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table'  
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { MatTableModule } from '@angular/material/table'
     RegisterComponent
   ],
   imports: [
+    MatDialogModule,
     MatTableModule,
     MatExpansionModule,
     MatRadioModule,

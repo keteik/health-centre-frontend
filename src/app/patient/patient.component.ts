@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DataStreamService } from '../services/data-stream.service';
+import { MatDialog } from '@angular/material/dialog';
+
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 type Visit = {
   date: Date;
@@ -21,22 +25,21 @@ type Visit = {
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css']
 })
-
 export class PatientComponent implements OnInit {
 
-  public userName: any = localStorage.getItem('name') + " " + localStorage.getItem('surname');
-
-  loadVisit = false;
-  loadPrescription = false;
+  public userName: string = "";
+  loadVisit: boolean = false;
+  loadPrescription: boolean = false;
 
   dataVisit: Visit[] = [];
+  displayedColumns: string[] = ['id', 'date', 'room', 'doctor', 'prescription'];
 
-  displayedColumns: string[] = ['id', 'date', 'room', 'doctor'];
 
-
-  constructor(private router: Router, private http: HttpClient, private dataStream: DataStreamService) { }
+  constructor(private router: Router, private http: HttpClient, private dataStream: DataStreamService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.userName = localStorage.getItem('name') + " " + localStorage.getItem('surname');
   }
 
   onLogOut() {
@@ -50,19 +53,41 @@ export class PatientComponent implements OnInit {
 
   onVisit() {
     this.loadPrescription = false;
-
     const url = "http://localhost:5000/visits/" + localStorage.getItem('id');
 
     this.dataStream.getVisitPatient(url).subscribe(results => {
       this.dataVisit = results;
+      for(let i = 0; i < this.dataVisit.length; i++){
+        this.dataVisit[i].date = new Date(this.dataVisit[i].date);
+      }
       this.loadVisit = true;
     })
-
-
   }
 
   onPrescription() {
     this.loadVisit = false;
   }
 
+  openDialog() {
+    this.dialog.open(DialogElementsExampleDialog);
+  }
+
+  closeDialog() {
+    this.dialog.closeAll();
+  }
+
 }
+
+
+@Component({
+  selector: 'dialog-elements-example-dialog',
+  templateUrl: 'dialog-elements-example-dialog.html',
+})
+export class DialogElementsExampleDialog extends PatientComponent{
+
+
+  close() {
+    super.closeDialog();
+  }
+}
+

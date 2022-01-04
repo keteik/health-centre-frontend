@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { DataStreamService } from '../services/data-stream.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private Auth: AuthService, private router: Router) {}
+  constructor(private Auth: AuthService, private router: Router, private dataStream: DataStreamService) {}
 
   public loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -24,8 +25,9 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.controls.email.value;
     const password = this.loginForm.controls.password.value;
 
-    this.Auth.getUserDetails(email, password).subscribe((data: any) => {
-      if(data.id){
+    this.Auth.getUserDetails(email, password).
+    subscribe((data: any) => {
+      if(data.id) {
         localStorage.setItem('role', data.role);
         localStorage.setItem('name', data.name);
         localStorage.setItem('surname', data.surname);
@@ -42,6 +44,5 @@ export class LoginComponent implements OnInit {
  onHome() {
    this.router.navigate(['/']);
  }
-
 
 }
