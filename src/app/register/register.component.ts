@@ -55,7 +55,6 @@ export class RegisterComponent implements OnInit {
             window.alert(data.message);
           }
         });
-
     } else {
       window.alert("Fill all fields");
     }

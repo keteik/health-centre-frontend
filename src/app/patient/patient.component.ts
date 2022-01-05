@@ -31,9 +31,7 @@ export class PatientComponent implements OnInit{
   dataVisit: Visit[] = [];
   displayedColumns: string[] = ['id', 'date', 'room', 'doctor', 'prescription'];
 
-
-  constructor(private router: Router, private http: HttpClient, private dataStream: DataStreamService,
-              public dialog: MatDialog) { }
+  constructor(private router: Router, private http: HttpClient, private dataStream: DataStreamService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userName = localStorage.getItem('name') + " " + localStorage.getItem('surname');
@@ -51,14 +49,17 @@ export class PatientComponent implements OnInit{
   onVisit() {
     this.loadPrescription = false;
     const url = "http://localhost:5000/visits/" + localStorage.getItem('id');
-
-    this.dataStream.getVisitPatient(url).subscribe(results => {
-      this.dataVisit = results;
-      for(let i = 0; i < this.dataVisit.length; i++){
-        this.dataVisit[i].date = new Date(this.dataVisit[i].date);
-      }
-      this.loadVisit = true;
-    })
+    
+    if(this.dataVisit.length === 0) {
+      this.dataStream.getVisitPatient(url).subscribe(results => {
+        this.dataVisit = results;
+        for(let i = 0; i < this.dataVisit.length; i++){
+          this.dataVisit[i].date = new Date(this.dataVisit[i].date);
+        }
+        this.loadVisit = true;
+      })
+    }
+    this.loadVisit = true;  
   }
 
   onPrescription() {
@@ -70,7 +71,6 @@ export class PatientComponent implements OnInit{
   }
 
 }
-
 
 @Component({
   selector: 'dialog-elements-example-dialog',
