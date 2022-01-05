@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { LoginGuard } from './services/login.guard';
-import { PatientComponent } from './patient/patient.component';
+import { DialogElementsExampleDialog, PatientComponent } from './patient/patient.component';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { DoctorComponent } from './doctor/doctor.component';
@@ -26,7 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table' 
 import { MatDialogModule } from '@angular/material/dialog';
 
 
@@ -37,7 +37,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     PatientComponent,
     HomeComponent,
     DoctorComponent,
-    RegisterComponent
+    RegisterComponent,
+    DialogElementsExampleDialog
   ],
   imports: [
     MatDialogModule,

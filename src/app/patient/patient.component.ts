@@ -4,9 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { DataStreamService } from '../services/data-stream.service';
 import { MatDialog } from '@angular/material/dialog';
 
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-
-
 type Visit = {
   date: Date;
   id: number;
@@ -25,7 +22,7 @@ type Visit = {
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css']
 })
-export class PatientComponent implements OnInit {
+export class PatientComponent implements OnInit{
 
   public userName: string = "";
   loadVisit: boolean = false;
@@ -72,10 +69,6 @@ export class PatientComponent implements OnInit {
     this.dialog.open(DialogElementsExampleDialog);
   }
 
-  closeDialog() {
-    this.dialog.closeAll();
-  }
-
 }
 
 
@@ -83,11 +76,5 @@ export class PatientComponent implements OnInit {
   selector: 'dialog-elements-example-dialog',
   templateUrl: 'dialog-elements-example-dialog.html',
 })
-export class DialogElementsExampleDialog extends PatientComponent{
-
-
-  close() {
-    super.closeDialog();
-  }
-}
+export class DialogElementsExampleDialog{}
 
