@@ -6,9 +6,6 @@
                 <button mat-button mat-list-item (click)="onVisit()" class="ref-element" style="margin-left: auto; margin-top: 5%; border: solid 2px; border-radius: 20px;">
                     Moje wizyty
                 </button>
-                <button mat-button mat-list-item (click)="onPrescription()" class="ref-element" style="margin-left: auto; margin-top: 5%; border: solid 2px; border-radius: 20px; margin-left: 20px;">
-                     Moje recepty
-                </button>   
               </mat-nav-list>
         </div>
         <div class="flex-item" fxFlex fxLayoutAlign="end start" style="margin-top: 7px;">
@@ -39,7 +36,7 @@
 
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef> Data </th>
-          <td mat-cell *matCellDef="let element"> {{element.date.toLocaleString()}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
         </ng-container>
 
         <ng-container matColumnDef="room">
@@ -54,7 +51,7 @@
 
         <ng-container matColumnDef="prescription">
           <th mat-header-cell *matHeaderCellDef> Recepta </th>
-          <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="openDialog()">Pokaż szczegóły</button> </td>
+          <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="openDialog(element.id)">Pokaż szczegóły</button> </td>
         </ng-container>
         
 

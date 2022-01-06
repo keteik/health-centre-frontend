@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 type Visit = {
@@ -13,6 +12,13 @@ type Visit = {
     name: string;
     surname: string;
   }
+}
+
+type Prescription = {
+  id: number;
+  name: string;
+  payment: number;
+  create_time: String;
 }
 
 @Injectable({
@@ -33,6 +39,12 @@ export class DataStreamService {
       email,
       password
     });
+  }
+
+  getPrescription(url: string): Observable<any> {
+    return this.http.get<Prescription>(url).pipe(map((res:Prescription) => {
+      return res;
+    }))
   }
   
 }
