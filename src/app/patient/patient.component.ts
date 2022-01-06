@@ -81,7 +81,8 @@ export class PatientComponent implements OnInit{
   openDialog(id: number) {
     this.dialog.open(DialogElementsExampleDialog, {
       data: {id: id},
-      width: '50%'
+      width: '80%',
+      height: '90%'
     });
   }
 
