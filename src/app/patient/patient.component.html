@@ -3,7 +3,7 @@
       <mat-toolbar color="primary" class="first-tool-bar">  
         <div class="flex-item">
               <mat-nav-list fxLayout="row">
-                <button mat-button mat-list-item (click)="onVisit()" class="ref-element" style="margin-left: auto; margin-top: 5%; border: solid 2px; border-radius: 20px;">
+                <button mat-button mat-list-item (click)="onVisit()" class="ref-element" style="margin-left: auto; margin-top: 14px; border: solid 2px; border-radius: 20px;">
                     Moje wizyty
                 </button>
               </mat-nav-list>
@@ -51,7 +51,7 @@
 
         <ng-container matColumnDef="prescription">
           <th mat-header-cell *matHeaderCellDef> Recepta </th>
-          <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="openDialog(element.id)">Pokaż szczegóły</button> </td>
+          <td mat-cell *matCellDef="let element"> <button mat-flat-button color="primary" (click)="openDialog(element.id)">Pokaż szczegóły</button> </td>
         </ng-container>
         
 

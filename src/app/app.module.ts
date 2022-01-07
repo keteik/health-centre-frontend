@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { LoginGuard } from './services/login.guard';
-import { PatientComponent, PrescriptionComponent } from './patient/patient.component';
+import { PatientComponent } from './patient/patient.component';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { DoctorComponent } from './doctor/doctor.component';
@@ -28,6 +28,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table' 
 import { MatDialogModule } from '@angular/material/dialog';
+import { PrescriptionDialogComponent } from './prescription-dialog/prescription-dialog.component';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HomeComponent,
     DoctorComponent,
     RegisterComponent,
-    PrescriptionComponent
+    PrescriptionDialogComponent
   ],
   imports: [
     MatDialogModule,

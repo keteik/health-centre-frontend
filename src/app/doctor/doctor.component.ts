@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PrescriptionComponent } from '../patient/patient.component';
+import { PrescriptionDialogComponent } from '../prescription-dialog/prescription-dialog.component';
 import { DataStreamService } from '../services/data-stream.service';
 
 
@@ -88,7 +88,7 @@ export class DoctorComponent implements OnInit {
   }
 
   openDialog(id: number) {
-    this.dialog.open(PrescriptionComponent, {
+    this.dialog.open(PrescriptionDialogComponent, {
       data: {id: id},
       width: '80%',
       height: '90%'

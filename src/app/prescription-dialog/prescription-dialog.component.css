@@ -13,16 +13,11 @@
     justify-content: center;
 }
 
-.first-tool-bar {
-    display: flex;
-    align-items: flex-start;
+button:hover {
+    background: #990b00;
   }
 
-  button:hover {
-    /*background: #536DFE;*/
-  }
-
-  table {
-      width: 100%;
-      overflow: auto;
-  }
+table {
+    width: 100%;
+    overflow: auto;
+}
