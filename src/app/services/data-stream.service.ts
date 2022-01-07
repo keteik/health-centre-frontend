@@ -14,6 +14,14 @@ type Visit = {
   }
 }
 
+type Patient = {
+  id: number;
+  name: string;
+  surname: string;
+  age: number;
+  gender: string;
+}
+
 type Prescription = {
   id: number;
   name: string;
@@ -28,8 +36,14 @@ export class DataStreamService {
 
   constructor(private http: HttpClient) { }
 
-  getVisitPatient(url: string): Observable<any> {
+  getVisitPatients(url: string): Observable<any> {
     return this.http.get<Visit>(url).pipe(map((res: Visit) => {
+      return res;
+    }))
+  }
+
+  getDoctorPatients(url: string): Observable<any> {
+    return this.http.get<Patient>(url).pipe(map((res: Patient) => {
       return res;
     }))
   }

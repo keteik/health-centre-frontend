@@ -60,14 +60,11 @@ export class PatientComponent implements OnInit{
 
   onVisit() {
     this.loadPrescription = false;
-    const url = "http://localhost:5000/visits/" + localStorage.getItem('id');
+    const url = "http://localhost:5000/visits/patient/" + localStorage.getItem('id');
     
     if(this.dataVisit.length === 0) {
-      this.dataStream.getVisitPatient(url).subscribe(results => {
+      this.dataStream.getVisitPatients(url).subscribe(results => {
         this.dataVisit = results;
-        //for(let i = 0; i < this.dataVisit.length; i++){
-        //  this.dataVisit[i].date = new Date(this.dataVisit[i].date);
-       // }
         this.loadVisit = true;
       })
     }
@@ -79,7 +76,7 @@ export class PatientComponent implements OnInit{
   }
 
   openDialog(id: number) {
-    this.dialog.open(DialogElementsExampleDialog, {
+    this.dialog.open(PrescriptionComponent, {
       data: {id: id},
       width: '80%',
       height: '90%'
@@ -89,12 +86,12 @@ export class PatientComponent implements OnInit{
 }
 
 @Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
+  selector: 'app-prescription',
+  templateUrl: './prescription.component.html',
   styleUrls: ['./patient.component.css']
 })
-export class DialogElementsExampleDialog {
-  constructor(public dialogRef: MatDialogRef<DialogElementsExampleDialog>,
+export class PrescriptionComponent {
+  constructor(public dialogRef: MatDialogRef<PrescriptionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private dataStream: DataStreamService
     ) {}
 
@@ -109,9 +106,9 @@ export class DialogElementsExampleDialog {
       this.dataStream.getPrescription(url).subscribe(results => {
         this.dataPrescription = results;
         this.loadPrescription = true;
+        window.scroll(0,0);
       })
     }
   }
-
 }
 

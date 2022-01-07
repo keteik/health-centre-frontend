@@ -1,6 +1,14 @@
-<h1>Twoje recepty</h1>
+<div mat-dialog-actions style="float: right; margin-bottom: 1px;">
+  <button mat-raised-button color="warn" mat-dialog-close >Zamknij</button>
+</div>
+
+<div mat-dialog-actions style="float: left;">
+  <h1 class="ref-element">Wystawione recepty</h1>
+</div>
+
+
 <div *ngIf="loadPrescription">
-  <table mat-table [dataSource]="dataPrescription" class="mat-elevation-z8">
+  <table mat-table id="matTable" [dataSource]="dataPrescription" class="mat-elevation-z8">
     
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Numer recepty </th>
@@ -26,8 +34,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>
-
-<div mat-dialog-actions style="float: right;">
-  <button mat-raised-button color="primary" mat-dialog-close >Zamknij</button>
 </div>

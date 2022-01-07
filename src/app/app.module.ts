@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { LoginGuard } from './services/login.guard';
-import { DialogElementsExampleDialog, PatientComponent } from './patient/patient.component';
+import { PatientComponent, PrescriptionComponent } from './patient/patient.component';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { DoctorComponent } from './doctor/doctor.component';
@@ -38,7 +38,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HomeComponent,
     DoctorComponent,
     RegisterComponent,
-    DialogElementsExampleDialog
+    PrescriptionComponent
   ],
   imports: [
     MatDialogModule,
