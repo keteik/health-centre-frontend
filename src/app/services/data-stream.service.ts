@@ -42,7 +42,7 @@ export class DataStreamService {
     }))
   }
 
-  getDoctorPatients(url: string): Observable<any> {
+  getPatients(url: string): Observable<any> {
     return this.http.get<Patient>(url).pipe(map((res: Patient) => {
       return res;
     }))

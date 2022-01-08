@@ -2,13 +2,16 @@
     <p>
       <mat-toolbar color="primary" class="first-tool-bar">  
         <div class="flex-item">
-              <mat-nav-list fxLayout="row">
-                <button mat-button mat-list-item (click)="onVisit()" class="ref-element" style="margin-left: auto; margin-top: 4%; border: solid 2px; border-radius: 20px;">
+              <mat-nav-list fxLayout="row" style="margin-top: 2%;">
+                <button mat-button mat-list-item (click)="onVisit()" class="ref-element" style="margin-left: auto; border: solid 2px; border-radius: 20px;">
                     Zakończone wizyty
                 </button>
-                <button mat-button mat-list-item (click)="onPatient()" class="ref-element" style="margin-left: 10px; margin-top: 4%; border: solid 2px; border-radius: 20px;">
+                <button mat-button mat-list-item (click)="onPatient()" class="ref-element" style="margin-left: 10px; border: solid 2px; border-radius: 20px;">
                     Prowadzeni pacjenci
                 </button>
+                <button mat-button mat-list-item (click)="onNewVisit()" class="ref-element" style="margin-left: 10px; border: solid 2px; border-radius: 20px;">
+                  Dodaj wiztę
+              </button>
               </mat-nav-list>
         </div>
         <div class="flex-item" fxFlex fxLayoutAlign="end start" style="margin-top: 7px;">
@@ -89,5 +92,44 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumnsPatient;"></tr>
         </table>
       </div>
+
+      <div *ngIf="loadNewVisitForm" fxLayoutAlign="center center" class="main-div">
+        <mat-card fxFlex="350px" style="margin-top: 30px; padding: auto;" >
+          <form [formGroup]="newVisitForm" (ngSubmit)="onSubmitNewVisit()" fxLayoutAlign="streatch" fxLayout="column">
+
+            <mat-form-field class="example-full-width" appearance="fill" class="register-form">
+              <mat-label>Pacjent</mat-label>
+              <input type="text"
+                      placeholder="Wybierz"
+                      aria-label="Number"
+                      matInput
+                      [formControl]="myControl"
+                      [matAutocomplete]="auto"
+                      formControlName="user" 
+                      required>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field  class="example-full-width" appearance="fill">
+              <input matInput placeholder="Gabinet *" type="number" formControlName="room" class="register-form" required>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill" class="register-form">
+              <mat-label>Wybierz date</mat-label>
+              <input matInput type="datetime-local" formControlName="date" required>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <button mat-raised-button class="register-form" color="primary">
+                  Potwierdz
+            </button>
+          </form>
+        </mat-card> 
+      </div>
+
     
 </body>
