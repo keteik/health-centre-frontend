@@ -11,6 +11,7 @@ import { DataStreamService } from '../services/data-stream.service';
 type Visit = {
   date: Date;
   id: number;
+  visitNumber: number;
   room: number;
   status: number;
   patient: {
@@ -81,6 +82,8 @@ export class DoctorComponent implements OnInit {
     if(this.dataVisit.length === 0) {
       this.dataStream.getVisitPatients(url).subscribe(results => {
         this.dataVisit = results;
+
+        console.log(this.dataVisit);
  
         this.loadVisit = true;
       })
