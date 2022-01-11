@@ -2,10 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { PrescriptionDialogComponent } from '../prescription-dialog/prescription-dialog.component';
 import { DataStreamService } from '../services/data-stream.service';
+import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 
 
 type Visit = {
@@ -40,7 +43,7 @@ export class DoctorComponent implements OnInit {
   loadVisit: boolean = false;
   loadPatient: boolean = false;
   loadNewVisitForm: boolean = false;
-
+  checked: boolean = false;
 
   dataVisit: Visit[] = [];
   dataPatient: Patient[] = [];
@@ -59,7 +62,7 @@ export class DoctorComponent implements OnInit {
   });
 
 
-  constructor(private http: HttpClient, private dataStream: DataStreamService, public dialog: MatDialog) { }
+  constructor(private http: HttpClient, private dataStream: DataStreamService, public dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
     this.userName = localStorage.getItem('name') + " " + localStorage.getItem('surname');
@@ -67,8 +70,11 @@ export class DoctorComponent implements OnInit {
 
   onLogOut() {
     this.http.get('http://localhost:5000/logout', {
-      }).subscribe((data: any) => {}
+      }).subscribe((data: any) => { }
+
     );
+
+    this.openSnackBar("Wylogowano", 1);
 
     localStorage.clear();
     window.location.reload();
@@ -171,16 +177,29 @@ export class DoctorComponent implements OnInit {
         userId
       }).subscribe((data: any) => {
           if(data.id) {
-            window.alert("Wizyta została dodana");
+            window.alert("Wizyta została dodana !");
             window.location.reload();
           } else {
             window.alert(data.message);
           }
         });
     } else {
-      window.alert("Fill all fields");
+      this.openSnackBar("Wypełnij wszytkie pola !", 3);
     }
     
   }
+
+  openSnackBar(message: string, duration: number) {
+    this._snackBar.open(message, "", {
+      verticalPosition: 'top',
+      duration: duration * 1000,
+    });
+  }
+
+  changeStatus(event: any) {
+    if ( event.target.checked ) {
+        console.log("test");
+   }
+}
 
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
     gender: new FormControl('', Validators.required),
   });
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -56,11 +57,18 @@ export class RegisterComponent implements OnInit {
           }
         });
     } else {
-      window.alert("Fill all fields");
+      this.openSnackBar("Fill all fields", 2);
     }
 }
 
-  onHome() {
-   this.router.navigate(['/']);
- }
+    onHome() {
+    this.router.navigate(['/']);
+  }
+
+  openSnackBar(message: string, duration: number) {
+    this._snackBar.open(message, "", {
+      verticalPosition: 'top',
+      duration: duration * 1000,
+    });
+  }
 }

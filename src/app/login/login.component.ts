@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { DataStreamService } from '../services/data-stream.service';
@@ -11,7 +12,7 @@ import { DataStreamService } from '../services/data-stream.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private Auth: AuthService, private router: Router, private dataStream: DataStreamService) {}
+  constructor(private Auth: AuthService, private router: Router, private dataStream: DataStreamService, private _snackBar: MatSnackBar) {}
 
   public loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -36,13 +37,20 @@ export class LoginComponent implements OnInit {
         this.Auth.setIsLoggedIn(true);
       }
       else{
-       window.alert(data.message);
+        this.openSnackBar(data.message, 2);
       }
     });
   }
 
- onHome() {
-   this.router.navigate(['/']);
- }
+  onHome() {
+    this.router.navigate(['/']);
+  }
+
+  openSnackBar(message: string, duration: number) {
+    this._snackBar.open(message, "", {
+      verticalPosition: 'top',
+      duration: duration * 1000,
+    });
+  }
 
 }

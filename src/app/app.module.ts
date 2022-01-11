@@ -21,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar'
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -32,6 +32,19 @@ import { PrescriptionDialogComponent } from './prescription-dialog/prescription-
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -41,9 +54,19 @@ import { MatNativeDateModule } from '@angular/material/core';
     HomeComponent,
     DoctorComponent,
     RegisterComponent,
-    PrescriptionDialogComponent
+    PrescriptionDialogComponent,
+    SnackBarComponent
   ],
   imports: [
+    FormsModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatListModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    NgxMatTimepickerModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
