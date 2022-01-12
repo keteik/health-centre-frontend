@@ -5,26 +5,41 @@
         <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
           <mat-icon>menu</mat-icon>
         </button>
-        <span>Przychodnia zdrowia</span>
-        <span class="menu-spacer"></span>
-
-        <span class="menu-spacer"></span>
+          <mat-icon fxShow="true" fxHide.gt-sm style="margin-left: auto;">person</mat-icon>
+          <span fxShow="true" fxHide.gt-sm  style="margin-left: 2px;">{{userName}}</span>
         <div fxShow="true" fxHide.lt-md fxFlex >
            <!--The following menu items will be hidden on both SM and XS screen sizes -->
 
-            <mat-nav-list fxLayout="row" fxLayoutAlign="end start">
+            <mat-nav-list fxLayout="row" fxLayoutAlign="center">
               <mat-list fxFlex>
                 <mat-list-item>
                   <button mat-button (click)="onVisit()" class="button-data">
+                    <mat-icon style="margin-bottom: 4px;"> table_chart</mat-icon>
                     Zakończone wizyty
-                </button>
-                <button mat-button (click)="onPatient()" class="button-data">
-                    Prowadzeni pacjenci 
-                </button>
-                <button mat-button (click)="onNewVisit()" class="button-data">
-                  Dodaj wiztę
-                </button>
-                <button mat-button (click)="onLogOut()" class="button-logout">Wyloguj się</button>
+                  </button>
+                  <button mat-button (click)="onPatient()" class="button-data">
+                    <mat-icon style="margin-bottom: 4px;"> people</mat-icon>
+                      Prowadzeni pacjenci 
+                  </button>
+                  <button mat-button (click)="onNewVisit()" class="button-data">
+                    <mat-icon style="margin-bottom: 4px;">add_box</mat-icon>
+                    Dodaj wiztę
+                  </button>
+                  <button mat-button [matMenuTriggerFor]="stationMenu" class="button-logout">
+                    <mat-icon>person</mat-icon>
+                    {{userName}}
+                  </button>
+                  <mat-menu #stationMenu="matMenu" xPosition="before">
+                    <button mat-menu-item class="mat-button">
+                      <mat-icon>settings</mat-icon>
+                      Ustawienia
+                    </button>
+                    <button mat-menu-item (click)="onLogOut()" class="mat-button">
+                      <mat-icon>logout</mat-icon>
+                      Wyloguj się
+                    </button>
+                  </mat-menu>
+
                 </mat-list-item>
               </mat-list>
             </mat-nav-list>
@@ -33,30 +48,36 @@
     </mat-toolbar>
   
     <mat-sidenav-container fxFlexFill>
-      <mat-sidenav #sidenav>
+      <mat-sidenav #sidenav style="background: #3F51B5;">
         <mat-nav-list>
           <mat-list>
 
             <mat-list-item style="margin-top: 20px;">
-              <button mat-button (click)="onVisit()" (click)="sidenav.toggle()" color="primary">
+              <button mat-button (click)="onVisit()" (click)="sidenav.toggle()" style="color: white;">
+                <mat-icon style="margin-bottom: 4px;"> table_chart</mat-icon>
                 Zakończone wizyty
               </button>
             </mat-list-item>
 
             <mat-list-item>
-              <button mat-button (click)="onPatient()" (click)="sidenav.toggle()" color="primary">
+              <button mat-button (click)="onPatient()" (click)="sidenav.toggle()" style="color: white;">
+                <mat-icon style="margin-bottom: 4px;"> people</mat-icon>
                 Prowadzeni pacjenci
               </button>
             </mat-list-item>
 
             <mat-list-item>
-              <button mat-button (click)="onNewVisit()" (click)="sidenav.toggle()" color="primary">
+              <button mat-button (click)="onNewVisit()" (click)="sidenav.toggle()" style="color: white;">
+                <mat-icon style="margin-bottom: 4px;">add_box</mat-icon>
                 Dodaj wizytę
               </button>
             </mat-list-item>
             
-            <mat-list-item>
-              <button mat-button (click)="onLogOut()" color="primary"> Wyloguj się</button>
+            <mat-list-item style="padding-top: 20px;">
+              <button mat-button (click)="onLogOut()" style="color: #b8cef2;"> 
+                <mat-icon>logout</mat-icon>
+                Wyloguj się
+              </button>
             </mat-list-item>
           </mat-list>
         </mat-nav-list>
@@ -134,7 +155,7 @@
                         placeholder="Wybierz"
                         aria-label="Number"
                         matInput
-                        [formControl]="myControl"
+                        [formControl]="newVisitControl"
                         [matAutocomplete]="auto"
                         formControlName="user" 
                         required>
@@ -149,17 +170,24 @@
                 <input matInput placeholder="Gabinet *" type="number" formControlName="room" class="register-form" required>
               </mat-form-field>
   
-              <mat-form-field class="example-full-width" appearance="fill">
+              <mat-form-field class="example-full-width" appearance="fill" style="font-size: 18px;">
                 <input matInput [ngxMatDatetimePicker]="picker" placeholder="Wybierz datę *" formControlName="date" required>             
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>        
                 <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
               </mat-form-field>
 
-              <mat-checkbox input type="checkbox" (change)="true" #checkBox>
+              <mat-checkbox input type="checkbox" (change)="true" (change)="onCheckBox()" #checkBox>
                 Recepta
               </mat-checkbox>
 
-              <button *ngIf="checkBox.checked"> test</button>
+              <div *ngIf="checkBox.checked">
+                <mat-form-field  class="example-full-width" appearance="fill">
+                  <input matInput placeholder="Nazwa leku *" type="text" formControlName="name" class="register-form" required>
+                </mat-form-field>
+                <mat-form-field  class="example-full-width" appearance="fill">
+                  <input matInput placeholder="Odpłata *" type="number" formControlName="payment" class="register-form" required>
+                </mat-form-field>
+              </div>
               
               <button mat-raised-button class="register-form" color="primary">
               Potwierdz

@@ -37,6 +37,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import  {MatSelectModule } from '@angular/material/select';
 
 
 import {
@@ -58,6 +59,7 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
     SnackBarComponent
   ],
   imports: [
+    MatSelectModule,
     FormsModule,
     MatCheckboxModule,
     MatSnackBarModule,

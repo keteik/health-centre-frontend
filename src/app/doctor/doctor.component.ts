@@ -54,11 +54,13 @@ export class DoctorComponent implements OnInit {
   options: string[] = [];
   filteredOptions: Observable<string[]> | undefined;
 
-  myControl = new FormControl();
+  newVisitControl = new FormControl();
   public newVisitForm = new FormGroup({
     user: new FormControl('', Validators.required),
     room: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.nullValidator),
+    payment: new FormControl('', Validators.nullValidator),
   });
 
 
@@ -134,7 +136,7 @@ export class DoctorComponent implements OnInit {
           this.options.push(this.patients[i].name + " " + this.patients[i].surname);
         }
 
-        this.filteredOptions = this.myControl.valueChanges.pipe(
+        this.filteredOptions = this.newVisitControl.valueChanges.pipe(
           startWith(''),
           map(value => this._filter(value))
         );
@@ -142,7 +144,7 @@ export class DoctorComponent implements OnInit {
       })
     }
     
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredOptions = this.newVisitControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
@@ -161,7 +163,12 @@ export class DoctorComponent implements OnInit {
       const userName = this.newVisitForm.controls.user.value;
       const room = this.newVisitForm.controls.room.value;
       const date = this.newVisitForm.controls.date.value;
+      const name = this.newVisitForm.controls.name.value;
+      const payment = this.newVisitForm.controls.payment.value;
+
       var patientId: number = 0;
+      var visitId: number = 0;
+
       const userId = localStorage.getItem('id');
 
       for(let i = 0; i < this.patients.length; i++){
@@ -177,12 +184,26 @@ export class DoctorComponent implements OnInit {
         userId
       }).subscribe((data: any) => {
           if(data.id) {
-            window.alert("Wizyta została dodana !");
+            visitId = data.id;
+
+            this.http.post('http://localhost:5000/prescriptions', {
+              visitId,
+              name,
+              payment,
+            }).subscribe((data: any) => {
+                if(!data.id) {
+                  this.openSnackBar(data.message, 3);
+                }
+              });
+              
             window.location.reload();
+            this.openSnackBar("Wizyta została dodana !", 2);
           } else {
-            window.alert(data.message);
+            this.openSnackBar(data.message, 3);
           }
         });
+
+        
     } else {
       this.openSnackBar("Wypełnij wszytkie pola !", 3);
     }
@@ -196,10 +217,20 @@ export class DoctorComponent implements OnInit {
     });
   }
 
-  changeStatus(event: any) {
-    if ( event.target.checked ) {
-        console.log("test");
-   }
-}
+  onCheckBox() {
+    if(!this.checked){
+      this.newVisitForm.controls['name'].setValidators(Validators.required);
+      this.newVisitForm.controls['payment'].setValidators(Validators.required);
+      this.checked = true;
+    } else {
+      this.newVisitForm.controls['name'].clearValidators();
+      this.newVisitForm.controls['name'].updateValueAndValidity();
+
+      this.newVisitForm.controls['payment'].clearValidators();
+      this.newVisitForm.controls['payment'].updateValueAndValidity();
+
+      this.checked = false;
+    }
+  }
 
 }

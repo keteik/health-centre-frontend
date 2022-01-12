@@ -1,7 +1,8 @@
-.ref-element {
-    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
-}
-
 .menu-spacer {
     flex: 1 1 auto;
+  }
+
+  .mat-button {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    justify-content: center;
   }
