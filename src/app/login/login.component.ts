@@ -46,6 +46,10 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  onRegister() {
+    this.router.navigate(['register']);
+  }
+
   openSnackBar(message: string, duration: number) {
     this._snackBar.open(message, "", {
       verticalPosition: 'top',

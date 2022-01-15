@@ -1,16 +1,12 @@
-.main-div mat-card {
-    padding: 12px;
-    border-radius: 10px;
-}
-
-.login-form {
-    padding: 10px;
-    font-size: 20px;
-}
-
-.ref-element {
+.button-close {
+    float: right; 
+    margin-bottom: 1px;
     font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
-    justify-content: center;
+}
+
+.title {
+    float: left;
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
 }
 
 button:hover {
@@ -21,3 +17,12 @@ table {
     width: 100%;
     overflow: auto;
 }
+
+.table-element {
+    font: 500 14px/32px Roboto, "Helvetica Neue", sans-serif;
+  }
+
+.background {
+    background-image: url('src/assets/background.jpg');
+    background-size: cover;
+  }

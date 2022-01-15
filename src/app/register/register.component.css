@@ -5,7 +5,8 @@
 
 .register-form {
     padding: 10px;
-    font-size: 20px;
+    font: 500 16px/20px Roboto, "Helvetica Neue", sans-serif;
+
 }
 
 .ref-element {

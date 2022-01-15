@@ -7,7 +7,7 @@
         </button>
           <mat-icon fxShow="true" fxHide.gt-sm style="margin-left: auto;">person</mat-icon>
           <span fxShow="true" fxHide.gt-sm  style="margin-left: 2px;">{{userName}}</span>
-        <div fxShow="true" fxHide.lt-md fxFlex >
+        <div fxShow="true" fxHide.lt-md fxFlex>
            <!--The following menu items will be hidden on both SM and XS screen sizes -->
 
             <mat-nav-list fxLayout="row" fxLayoutAlign="center">
@@ -17,14 +17,18 @@
                     <mat-icon style="margin-bottom: 4px;"> table_chart</mat-icon>
                     Zakończone wizyty
                   </button>
+                  <button mat-button (click)="onUpcomingVisit()" class="button-data">
+                    <mat-icon style="margin-bottom: 4px;"> upcoming</mat-icon>
+                    Zbiżające się wizyty
+                  </button>
                   <button mat-button (click)="onPatient()" class="button-data">
                     <mat-icon style="margin-bottom: 4px;"> people</mat-icon>
                       Prowadzeni pacjenci 
                   </button>
-                  <button mat-button (click)="onNewVisit()" class="button-data">
+                 <!-- <button mat-button (click)="onNewVisit()" class="button-data">
                     <mat-icon style="margin-bottom: 4px;">add_box</mat-icon>
                     Dodaj wiztę
-                  </button>
+                  </button>-->
                   <button mat-button [matMenuTriggerFor]="stationMenu" class="button-logout">
                     <mat-icon>person</mat-icon>
                     {{userName}}
@@ -81,35 +85,73 @@
             </mat-list-item>
           </mat-list>
         </mat-nav-list>
-      </mat-sidenav>
-      <mat-sidenav-content fxFlexFill >
+      </mat-sidenav>;
+      <mat-sidenav-content fxFlexFill class="background">
 
         <div *ngIf="loadVisit" style="height: auto;" #loadVisit>
           <table mat-table [dataSource]="dataVisit" class="mat-elevation-z8">
             
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> Numer wizyty </th>
-              <td mat-cell *matCellDef="let element"> {{element.visitNumber}} </td>
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Id </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.visitNumber}} </td>
             </ng-container>
   
             <ng-container matColumnDef="patient">
-              <th mat-header-cell *matHeaderCellDef> Pacjent </th>
-              <td mat-cell *matCellDef="let element"> {{element.patient.name + " " + element.patient.surname}} </td>
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Pacjent </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.patient.name + " " + element.patient.surname}} </td>
             </ng-container>
   
             <ng-container matColumnDef="room">
-              <th mat-header-cell *matHeaderCellDef> Gabinet </th>
-              <td mat-cell *matCellDef="let element"> {{element.room}} </td>
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Gabinet </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.room}} </td>
             </ng-container>
     
             <ng-container matColumnDef="date">
-              <th mat-header-cell *matHeaderCellDef> Data </th>
-              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Data </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.date}} </td>
             </ng-container>
   
             <ng-container matColumnDef="prescription">
-              <th mat-header-cell *matHeaderCellDef> Recepta </th>
-              <td mat-cell *matCellDef="let element"> <button mat-flat-button color="primary" (click)="openDialog(element.id)">Szczegóły</button> </td>
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Recepta </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> <button mat-flat-button color="primary" (click)="openPrescriptionDialog(element.id)">Szczegóły</button> </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsVisit"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsVisit;"></tr>
+          </table>
+        </div>
+
+        <div *ngIf="loadUpcomingVisit" style="height: auto;" #loadVisit>
+          <table mat-table [dataSource]="dataUpcomingVisit" class="mat-elevation-z8">
+            
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Id </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.visitNumber}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="patient">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Pacjent </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.patient.name + " " + element.patient.surname}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="room">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Gabinet </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.room}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Data </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.date}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="prescription">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Status </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> 
+                <button mat-icon-button color="primary" (click)="openVisitDialog(element.id)">
+                  <mat-icon>check</mat-icon>
+                </button>
+              </td>
+                
             </ng-container>
   
             <tr mat-header-row *matHeaderRowDef="displayedColumnsVisit"></tr>
@@ -121,23 +163,23 @@
           <table mat-table [dataSource]="dataPatient" class="mat-elevation-z8">
             
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> Numer </th>
-              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Id </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.id}} </td>
             </ng-container>
   
             <ng-container matColumnDef="patient">
-              <th mat-header-cell *matHeaderCellDef> Pacjent </th>
-              <td mat-cell *matCellDef="let element"> {{element.name + " " + element.surname}} </td>
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Pacjent </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.name + " " + element.surname}} </td>
             </ng-container>
     
             <ng-container matColumnDef="age">
-              <th mat-header-cell *matHeaderCellDef> Wiek </th>
-              <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Wiek </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.age}} </td>
             </ng-container>
     
             <ng-container matColumnDef="gender">
-              <th mat-header-cell *matHeaderCellDef> Płeć </th>
-              <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Płeć </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.gender}} </td>
             </ng-container>        
     
             <tr mat-header-row *matHeaderRowDef="displayedColumnsPatient"></tr>
@@ -145,7 +187,7 @@
           </table>
         </div>
 
-        <div *ngIf="loadNewVisitForm" fxLayoutAlign="center center" class="main-div">
+       <!-- <div *ngIf="loadNewVisitForm" fxLayoutAlign="center center" class="main-div">
           <mat-card fxFlex="350px" style="margin-top: 30px; padding: auto;" >
   
             <form [formGroup]="newVisitForm" (ngSubmit)="onSubmitNewVisit()" fxLayoutAlign="streatch" fxLayout="column">
@@ -170,13 +212,13 @@
                 <input matInput placeholder="Gabinet *" type="number" formControlName="room" class="register-form" required>
               </mat-form-field>
   
-              <mat-form-field class="example-full-width" appearance="fill" style="font-size: 18px;">
+              <mat-form-field class="example-full-width" appearance="fill" class="register-form">
                 <input matInput [ngxMatDatetimePicker]="picker" placeholder="Wybierz datę *" formControlName="date" required>             
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>        
                 <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
               </mat-form-field>
 
-              <mat-checkbox input type="checkbox" (change)="true" (change)="onCheckBox()" #checkBox>
+              <mat-checkbox input type="checkbox" (change)="true" (change)="onCheckBox()" #checkBox class="register-form">
                 Recepta
               </mat-checkbox>
 
@@ -189,53 +231,16 @@
                 </mat-form-field>
               </div>
               
-              <button mat-raised-button class="register-form" color="primary">
-              Potwierdz
-              </button>
-              
+              <div class="confirm-visit">
+                <button mat-raised-button class="register-form" color="primary">
+                  Potwierdz
+                 </button>
+              </div>             
             </form>
           </mat-card> 
-        </div>
+        </div>-->
 
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>
 </body>
-
-
-
-
-      
-
-          <!--<p>
-      <mat-toolbar color="primary" class="first-tool-bar">  
-        <div class="flex-item">
-              <mat-nav-list fxLayout="row" style="margin-top: 2%;">
-                <button mat-button mat-list-item (click)="onVisit()" class="ref-element" style="margin-left: auto; border: solid 2px; border-radius: 20px;">
-                    Zakończone wizyty
-                </button>
-                <button mat-button mat-list-item (click)="onPatient()" class="ref-element" style="margin-left: 10px; border: solid 2px; border-radius: 20px;">
-                    Prowadzeni pacjenci
-                </button>
-                <button mat-button mat-list-item (click)="onNewVisit()" class="ref-element" style="margin-left: 10px; border: solid 2px; border-radius: 20px;">
-                  Dodaj wiztę
-              </button>
-              </mat-nav-list>
-        </div>
-        <div class="flex-item" fxFlex fxLayoutAlign="end start" style="margin-top: 7px;">
-            <mat-accordion >
-                <mat-expansion-panel hideToggle style="background-color: #283593">
-                    <mat-expansion-panel-header >
-                      <mat-panel-title class="ref-element" style="margin-right: 0; color: white;" >
-                        {{userName}}
-                      </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <button mat-button mat-list-item (click)="onLogOut()" class="ref-element" style="margin-left: auto; color: white; ">
-                        Wyloguj się
-                      </button>
-                  </mat-expansion-panel>
-            </mat-accordion>
-        </div>
-  
-      </mat-toolbar>
-    </p>-->

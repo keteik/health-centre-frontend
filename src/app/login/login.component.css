@@ -1,4 +1,4 @@
-.main-div mat-card {
+.form-div mat-card {
     padding: 12px;
     border-radius: 10px;
 }
@@ -11,3 +11,23 @@
 .ref-element {
     font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
 }
+
+.new-accout {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+
+}
+
+.mat-button {
+    background-color: #4CAF50;
+    margin-left: 10px;
+    color: white;
+}
+
+.background {
+    background-image: url('src/assets/background.jpg');
+    background-size: cover;
+  }

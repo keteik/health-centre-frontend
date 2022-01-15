@@ -37,8 +37,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import  {MatSelectModule } from '@angular/material/select';
-
+import { MatSelectModule } from '@angular/material/select';
 
 import {
   NgxMatDatetimePickerModule,
@@ -46,6 +45,7 @@ import {
   NgxMatTimepickerModule
 } from '@angular-material-components/datetime-picker';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { VisitComponent } from './visit/visit.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +56,8 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
     DoctorComponent,
     RegisterComponent,
     PrescriptionDialogComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    VisitComponent
   ],
   imports: [
     MatSelectModule,

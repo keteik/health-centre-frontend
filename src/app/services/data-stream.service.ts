@@ -29,6 +29,17 @@ type Prescription = {
   create_time: String;
 }
 
+type Doctor = {
+  id: number;
+  name: string;
+  surname: string;
+  phone: number;
+  speciality: string;
+  age: number;
+  gender: string;
+  userId: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -60,5 +71,24 @@ export class DataStreamService {
       return res;
     }))
   }
+
+  getDoctors(url: string): Observable<any> {
+    return this.http.get<Doctor>(url).pipe(map((res: Doctor) => {
+      return res;
+    }))
+  }
+
+  getDoctorsBySpecialty(url: string, specialty: string): Observable<any> {
+    return this.http.post(url, {
+      specialty
+    });
+  }
+
+  getUpcomingVisits(url: string): Observable<any> {
+    return this.http.get<Visit>(url).pipe(map((res: Visit) => {
+      return res;
+    }))
+  }
+  
   
 }

@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { PrescriptionDialogComponent } from '../prescription-dialog/prescription-dialog.component';
 import { DataStreamService } from '../services/data-stream.service';
-import { SnackBarComponent } from '../snack-bar/snack-bar.component';
-
+import { VisitComponent } from '../visit/visit.component';
 
 type Visit = {
   date: Date;
@@ -43,9 +42,11 @@ export class DoctorComponent implements OnInit {
   loadVisit: boolean = false;
   loadPatient: boolean = false;
   loadNewVisitForm: boolean = false;
+  loadUpcomingVisit: boolean = false;
   checked: boolean = false;
 
   dataVisit: Visit[] = [];
+  dataUpcomingVisit: Visit[] = [];
   dataPatient: Patient[] = [];
   patients: Patient[] = [];
 
@@ -85,14 +86,12 @@ export class DoctorComponent implements OnInit {
   onVisit() {
     this.loadPatient = false;
     this.loadNewVisitForm = false;
+    this.loadUpcomingVisit = false;
     const url = "http://localhost:5000/visits/doctor/" + localStorage.getItem('id');
     
     if(this.dataVisit.length === 0) {
       this.dataStream.getVisitPatients(url).subscribe(results => {
         this.dataVisit = results;
-
-        console.log(this.dataVisit);
- 
         this.loadVisit = true;
       })
     }
@@ -102,6 +101,7 @@ export class DoctorComponent implements OnInit {
   onPatient() {
     this.loadVisit = false
     this.loadNewVisitForm = false;
+    this.loadUpcomingVisit = false;
     const url = "http://localhost:5000/patients/doctor/" + localStorage.getItem('id');
     
     if(this.dataPatient.length === 0) {
@@ -114,7 +114,7 @@ export class DoctorComponent implements OnInit {
     this.loadPatient = true;  
   }
 
-  openDialog(id: number) {
+  openPrescriptionDialog(id: number) {
     this.dialog.open(PrescriptionDialogComponent, {
       data: {id: id},
       width: '80%',
@@ -125,6 +125,7 @@ export class DoctorComponent implements OnInit {
   onNewVisit() {
     this.loadVisit = false;
     this.loadPatient = false;
+    this.loadUpcomingVisit = false;
     this.loadNewVisitForm = true;
     
     const url = "http://localhost:5000/patients";
@@ -231,6 +232,30 @@ export class DoctorComponent implements OnInit {
 
       this.checked = false;
     }
+  }
+
+  onUpcomingVisit() {
+    this.loadPatient = false;
+    this.loadNewVisitForm = false;
+    this.loadVisit = false;
+    const url = "http://localhost:5000/visits/upcoming/" + localStorage.getItem('id');
+    
+    if(this.dataUpcomingVisit.length === 0) {
+      this.dataStream.getUpcomingVisits(url).subscribe(results => {
+        this.dataUpcomingVisit = results;
+        this.loadUpcomingVisit = true;
+        console.log(this.dataUpcomingVisit);
+      })
+    }
+    this.loadUpcomingVisit = true; 
+  }
+
+  openVisitDialog(id: number) {
+    this.dialog.open(VisitComponent, {
+      data: {id: id},
+      width: '400px',
+      height: '400px'
+    });
   }
 
 }

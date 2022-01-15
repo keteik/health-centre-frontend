@@ -6,3 +6,32 @@
     font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
     justify-content: center;
   }
+
+  .example-card {
+    max-width: 600px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #info {
+    font: 500 16px/40px Roboto, "Helvetica Neue", sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #info td, #info th {
+    padding: 8px;
+  }
+  
+  #info tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #info tr:hover {background-color: #ddd;}
+  
+  #info th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }

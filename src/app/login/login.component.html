@@ -1,4 +1,4 @@
-<body style="background-color: #e6e6e6; overflow: hidden;">
+<body style="background-color: #e6e6e6; overflow: hidden;" class="background">
     <p style=>
         <mat-toolbar color="primary">
           <button mat-icon-button (click)="onHome()" aria-label="Example icon-button with home icon" class="ref-element">
@@ -8,7 +8,7 @@
           <span class="example-spacer"></span>
         </mat-toolbar>
     </p>
-    <div fxLayoutAlign="center center" fxFlexFill class="main-div">
+    <div fxLayoutAlign="center center" fxFlexFill class="form-div">
         <mat-card fxFlex="350px" style="padding: auto;">
             <mat-icon aria-hidden="false" aria-label="Example home icon" style="position: absolute; left: 50%;">
                 home
@@ -21,9 +21,18 @@
                     <input matInput placeholder="Hasło" type="password" formControlName="password" class="login-form" required>
                 </mat-form-field>
                 <button mat-raised-button class="login-form" color="primary">
+                    <mat-icon>login</mat-icon>
                     Zaloguj się
                 </button>
             </form>
+            <mat-divider style="margin-top: 25px;"></mat-divider>
+
+            <div class="new-accout">
+                <button mat-button (click)="onRegister()">
+                    <mat-icon>person_add</mat-icon>
+                    Utworz nowe konto
+                </button>
+            </div>
         </mat-card>
     </div>
     

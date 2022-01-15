@@ -1,0 +1,31 @@
+<div mat-dialog-actions class="title">
+    <h1 class="ref-element">Potwierdz  zakończenie wizyty</h1>
+</div>
+
+<div fxLayoutAlign="center center" class="main-div">
+    <mat-card fxFlex="350px" style="padding: auto; margin-top: 20px;" >
+      <form [formGroup]="newVisitForm" (ngSubmit)="onSubmitVisit()" fxLayoutAlign="streatch" fxLayout="column">
+        <mat-checkbox input type="checkbox" (change)="true" (change)="onCheckBox()" #checkBox class="register-form">
+          Recepta
+        </mat-checkbox>
+
+        <div *ngIf="checkBox.checked">
+          <mat-form-field  class="example-full-width" appearance="fill">
+            <input matInput placeholder="Nazwa leku *" type="text" formControlName="name" class="register-form" required>
+          </mat-form-field>
+          <mat-form-field  class="example-full-width" appearance="fill">
+            <input matInput placeholder="Odpłata *" type="number" formControlName="payment" class="register-form" required>
+          </mat-form-field>
+        </div>
+        
+        <div class="confirm-visit">
+          <button mat-raised-button class="register-form" color="primary">
+            Potwierdz
+           </button>
+        </div>          
+      </form>
+    </mat-card> 
+  </div>
+  <div mat-dialog-actions class="button-close" style="justify-content: end;">
+    <button mat-raised-button color="warn" mat-dialog-close >Zamknij</button>
+</div>
