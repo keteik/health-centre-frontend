@@ -50,6 +50,7 @@ export class DoctorComponent implements OnInit {
   dataPatient: Patient[] = [];
   patients: Patient[] = [];
 
+  displayedColumnsUpcomingVisit: string[] = ['id', 'patient', 'room', 'date', 'status'];
   displayedColumnsVisit: string[] = ['id', 'patient', 'room', 'date', 'prescription'];
   displayedColumnsPatient: string[] = ['id', 'patient', 'age', 'gender'];
   options: string[] = [];

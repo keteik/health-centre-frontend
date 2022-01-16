@@ -1,0 +1,20 @@
+.register-form {
+    padding: 10px;
+    font: 500 16px/20px Roboto, "Helvetica Neue", sans-serif;
+
+}
+
+.main-div mat-card {
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.button-close {
+    float: right; 
+    margin-bottom: 1px;
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+.title {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}

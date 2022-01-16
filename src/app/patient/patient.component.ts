@@ -60,8 +60,10 @@ export class PatientComponent implements OnInit{
   dataDoctor: Doctor[] = [];
   datasSpecialty: Specialty[] = [];
   dataVisit: Visit[] = [];
+
   filteredOptionsSpecialty: Observable<string[]> | undefined;
   filteredOptionsDoctor: Observable<string[]> | undefined;
+  
   optionsSpecialty: string[] = [];
   optionsDoctor: string[] = [];
 

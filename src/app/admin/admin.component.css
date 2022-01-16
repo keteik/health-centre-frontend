@@ -1,0 +1,75 @@
+.main-div mat-card {
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.mat-button {
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  justify-content: center;
+}
+
+.mat-checkbox {
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  margin-bottom: 10px;
+}
+
+  .mat-button:hover {
+    background: #536DFE;
+  }
+
+  .button-data {
+    margin-left: 10px; 
+    color: white;
+  }
+
+  .button-logout {
+    color: white; 
+    margin-left: auto;
+  }
+
+  table {
+      width: 100%;
+      overflow: auto;
+      margin-bottom: 70px;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .register-form {
+    font-size: 16px;
+}
+
+.mat-list-base {
+  padding-top: 0px;
+}
+
+.confirm-visit {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.table-element {
+  font: 500 14px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+.background {
+  background-image: url('src/assets/background.jpg');
+  background-size: cover;
+}
+
+.example-card {
+  max-width: 400px;
+  margin-bottom: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.register-form {
+    padding: 10px;
+    font: 500 16px/20px Roboto, "Helvetica Neue", sans-serif;
+
+}

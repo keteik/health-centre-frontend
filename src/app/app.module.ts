@@ -46,6 +46,8 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { VisitComponent } from './visit/visit.component';
+import { AdminComponent } from './admin/admin.component';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { VisitComponent } from './visit/visit.component';
     RegisterComponent,
     PrescriptionDialogComponent,
     SnackBarComponent,
-    VisitComponent
+    VisitComponent,
+    AdminComponent,
+    EditDialogComponent
   ],
   imports: [
     MatSelectModule,
@@ -113,6 +117,11 @@ import { VisitComponent } from './visit/visit.component';
       {
         path: 'doctor',
         component: DoctorComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,
         canActivate: [AuthGuard]
       },
       {

@@ -1,0 +1,92 @@
+<div fxLayoutAlign="center center" class="main-div">
+    <mat-card *ngIf="loadEditPatient" fxFlex="350px" style="padding: auto; margin-top: 20px;" >
+        <form [formGroup]="editPatientForm" (ngSubmit)="onEditPatientSubmit()" fxLayoutAlign="streatch" fxLayout="column" class="register-form">
+            <mat-form-field>
+                <input matInput placeholder="Imię" type="text" formControlName="name" class="register-form" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Nazwisko" type="text" formControlName="surname" class="register-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Telefon" type="number" formControlName="phone" class="register-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Pesel" type="number" formControlName="pesel" class="register-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Wiek" type="number" formControlName="age" class="register-form" required>
+            </mat-form-field>
+            <mat-radio-group formControlName="gender" required class="register-form" style="padding-bottom: 20px;" >
+                <mat-radio-button value="male">Mężczyzna</mat-radio-button>
+                <mat-radio-button value="female" style="margin-left: 10px;">Kobieta</mat-radio-button>
+            </mat-radio-group>
+            <button mat-raised-button color="primary" class="register-form">
+                <mat-icon>edit</mat-icon>
+                Edytuj
+            </button>
+        </form>
+        <div mat-dialog-actions class="button-close">
+            <button mat-raised-button color="warn" mat-dialog-close >Zamknij</button>
+        </div>
+    </mat-card>
+
+    <mat-card *ngIf="loadDeletePatient" fxFlex="250px" style="padding: auto; margin-top: 20px;" >
+        <div mat-dialog-actions class="title">
+            <h1 class="ref-element">Na pewno usunąć ?</h1>
+          </div>
+        <div style="display: flex;justify-content: center; margin-top: 10px;">
+            <button mat-raised-button color="warn" mat-dialog-close >Anuluj</button>
+            <button mat-raised-button color="primary" (click)="onDeletePatientSubmit()"  style="margin-left: 10px;">Potwierdz</button>
+        </div>
+    </mat-card>
+
+    <mat-card *ngIf="loadEditDoctor" fxFlex="350px" style="padding: auto; margin-top: 20px;" >
+        <form [formGroup]="editDoctorForm" (ngSubmit)="onEditDoctorSubmit()" fxLayoutAlign="streatch" fxLayout="column" class="register-form">
+            <mat-form-field>
+                <input matInput placeholder="Imię" type="text" formControlName="name" class="register-form" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Nazwisko" type="text" formControlName="surname" class="register-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Telefon" type="number" formControlName="phone" class="register-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Specjalność" type="text" formControlName="specialty" class="register-form" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Wiek" type="number" formControlName="age" class="register-form" required>
+            </mat-form-field>
+            <mat-radio-group formControlName="gender" required class="register-form" style="padding-bottom: 20px;" >
+                <mat-radio-button value="male">Mężczyzna</mat-radio-button>
+                <mat-radio-button value="female" style="margin-left: 10px;">Kobieta</mat-radio-button>
+            </mat-radio-group>
+            <button mat-raised-button color="primary" class="register-form">
+                <mat-icon>edit</mat-icon>
+                Edytuj
+            </button>
+        </form>
+        <div mat-dialog-actions class="button-close">
+            <button mat-raised-button color="warn" mat-dialog-close >Zamknij</button>
+        </div>
+    </mat-card>
+
+    <mat-card *ngIf="loadDeleteDoctor" fxFlex="250px" style="padding: auto; margin-top: 20px;" >
+        <div mat-dialog-actions class="title">
+            <h1 class="ref-element">Na pewno usunąć ?</h1>
+          </div>
+        <div style="display: flex;justify-content: center; margin-top: 10px;">
+            <button mat-raised-button color="warn" mat-dialog-close >Anuluj</button>
+            <button mat-raised-button color="primary" (click)="onDeleteDoctorSubmit()"  style="margin-left: 10px;">Potwierdz</button>
+        </div>
+    </mat-card>
+
+
+    
+
+  </div>
+
+
+
+
+
