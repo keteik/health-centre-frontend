@@ -81,6 +81,16 @@
         </div>
     </mat-card>
 
+    <mat-card *ngIf="loadConfirmVisit" fxFlex="280px" style="padding: auto; margin-top: 20px;" >
+        <div mat-dialog-actions class="title">
+            <h1 class="ref-element">Na pewno potwierdzić ?</h1>
+          </div>
+        <div style="display: flex;justify-content: center; margin-top: 10px;">
+            <button mat-raised-button color="warn" mat-dialog-close >Anuluj</button>
+            <button mat-raised-button color="primary" (click)="onConfirmVisitSubmit()"  style="margin-left: 10px;">Potwierdz</button>
+        </div>
+    </mat-card>
+
 
     
 

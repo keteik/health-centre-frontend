@@ -123,7 +123,7 @@
           </table>
         </div>
 
-        <div *ngIf="loadUpcomingVisit" style="height: auto;" #loadVisit>
+        <div *ngIf="loadUpcomingVisit" style="height: auto; min-width: 500px;" #loadVisit>
           <table mat-table [dataSource]="dataUpcomingVisit" class="mat-elevation-z8">
             
             <ng-container matColumnDef="id">
@@ -188,59 +188,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumnsPatient;"></tr>
           </table>
         </div>
-
-       <!-- <div *ngIf="loadNewVisitForm" fxLayoutAlign="center center" class="main-div">
-          <mat-card fxFlex="350px" style="margin-top: 30px; padding: auto;" >
-  
-            <form [formGroup]="newVisitForm" (ngSubmit)="onSubmitNewVisit()" fxLayoutAlign="streatch" fxLayout="column">
-              <mat-form-field class="example-full-width" appearance="fill" class="register-form">
-                <mat-label>Pacjent</mat-label>
-                <input type="text"
-                        placeholder="Wybierz"
-                        aria-label="Number"
-                        matInput
-                        [formControl]="newVisitControl"
-                        [matAutocomplete]="auto"
-                        formControlName="user" 
-                        required>
-                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                      {{option}}
-                    </mat-option>
-                  </mat-autocomplete>
-              </mat-form-field>
-  
-              <mat-form-field  class="example-full-width" appearance="fill">
-                <input matInput placeholder="Gabinet *" type="number" formControlName="room" class="register-form" required>
-              </mat-form-field>
-  
-              <mat-form-field class="example-full-width" appearance="fill" class="register-form">
-                <input matInput [ngxMatDatetimePicker]="picker" placeholder="Wybierz datę *" formControlName="date" required>             
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>        
-                <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
-              </mat-form-field>
-
-              <mat-checkbox input type="checkbox" (change)="true" (change)="onCheckBox()" #checkBox class="register-form">
-                Recepta
-              </mat-checkbox>
-
-              <div *ngIf="checkBox.checked">
-                <mat-form-field  class="example-full-width" appearance="fill">
-                  <input matInput placeholder="Nazwa leku *" type="text" formControlName="name" class="register-form" required>
-                </mat-form-field>
-                <mat-form-field  class="example-full-width" appearance="fill">
-                  <input matInput placeholder="Odpłata *" type="number" formControlName="payment" class="register-form" required>
-                </mat-form-field>
-              </div>
-              
-              <div class="confirm-visit">
-                <button mat-raised-button class="register-form" color="primary">
-                  Potwierdz
-                 </button>
-              </div>             
-            </form>
-          </mat-card> 
-        </div>-->
 
       </mat-sidenav-content>
     </mat-sidenav-container>

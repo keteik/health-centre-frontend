@@ -20,7 +20,7 @@
                     </button>
                     <mat-menu #patientMenu="matMenu" xPosition="before">
                         <button mat-menu-item (click)="onNewPatient()" class="mat-button">
-                            <mat-icon>add_circle</mat-icon>
+                            <mat-icon>person_add</mat-icon>
                             Dodaj nowego
                         </button>
                         <button mat-menu-item (click)="onPatients()" class="mat-button">
@@ -35,7 +35,7 @@
                   </button>
                   <mat-menu #doctorMenu="matMenu" xPosition="before">
                       <button mat-menu-item (click)="onNewDoctor()" class="mat-button">
-                          <mat-icon>add_circle</mat-icon>
+                          <mat-icon>person_add</mat-icon>
                           Dodaj nowego
                       </button>
                       <button mat-menu-item (click)="onDoctors()" class="mat-button">
@@ -50,17 +50,17 @@
                 </button>
                 <mat-menu #visitMenu="matMenu" xPosition="before">
                     <button mat-menu-item (click)="onNewVisit()" class="mat-button">
-                        <mat-icon>add_circle</mat-icon>
+                        <mat-icon>add_box</mat-icon>
                         Dodaj nową
                     </button>
-                    <button mat-menu-item (click)="onEndedVisits()" class="mat-button">
-                        <mat-icon>table_chart</mat-icon>
-                        Pokaż zakończone
+                    <button mat-menu-item (click)="onVisits()" class="mat-button">
+                        <mat-icon>wysiwyg</mat-icon>
+                        Zakończone
                     </button>
-                   <!-- <button mat-menu-item (click)="onUnconfirmedVisits()" class="mat-button">
-                      <mat-icon>table_chart</mat-icon>
-                      Pokaż niepotwierdzone
-                  </button>-->
+                    <button mat-menu-item (click)="onUnconfirmedVisits()" class="mat-button">
+                      <mat-icon>new_releases</mat-icon>
+                      Niepotwierdzone
+                  </button>
                 </mat-menu>
 
 
@@ -99,39 +99,60 @@
             <mat-list>
 
               <mat-list-item style="margin-top: 20px;">
-                <button mat-button (click)="sidenav.toggle()" style="color: white;">
+                <button mat-button (click)="onNewPatient()" (click)="sidenav.toggle()" style="color: white;">
+                  <mat-icon style="margin-bottom: 4px;"> person_add</mat-icon>
+                  Dodaj pacjenta
+                </button>
+              </mat-list-item>
+
+              <mat-list-item style="margin-top: 1px;">
+                <button mat-button (click)="onPatients()" (click)="sidenav.toggle()" style="color: white;">
                   <mat-icon style="margin-bottom: 4px;"> table_chart</mat-icon>
-                  Zakończone wizyty
+                  Pokaż pacjentów
                 </button>
               </mat-list-item>
 
               <mat-list-item style="margin-top: 20px;">
-                <button mat-button [matMenuTriggerFor]="patientMenu" style="color: white;">
-                  <mat-icon style="margin-bottom: 4px;"> table_chart</mat-icon>
-                  Pacjeci
+                <button mat-button (click)="onNewDoctor()" (click)="sidenav.toggle()" style="color: white;">
+                  <mat-icon style="margin-bottom: 4px;"> person_add</mat-icon>
+                  Dodaj lekarza
                 </button>
-                <mat-menu #patientMenu="matMenu" xPosition="before" >
-                  <button mat-menu-item (click)="onNewPatient()" (click)="sidenav.toggle()" class="mat-button">
-                      <mat-icon>add_circle</mat-icon>
-                      Dodaj nowego
-                  </button>
-                  <button mat-menu-item (click)="onPatients()" (click)="sidenav.toggle()" class="mat-button">
-                      <mat-icon>table_chart</mat-icon>
-                      Pokaż wszystkich
-                  </button>
-              </mat-menu>
-             </mat-list-item>
+              </mat-list-item>
 
+              <mat-list-item style="margin-top: 1px;">
+                <button mat-button (click)="onDoctors()" (click)="sidenav.toggle()" style="color: white;">
+                  <mat-icon style="margin-bottom: 4px;"> table_chart</mat-icon>
+                  Pokaż lekarzy
+                </button>
+              </mat-list-item>
 
+              <mat-list-item style="margin-top: 20px;">
+                <button mat-button (click)="onNewVisit()" (click)="sidenav.toggle()" style="color: white;">
+                  <mat-icon style="margin-bottom: 4px;"> add_box</mat-icon>
+                  Dodaj wizytę
+                </button>
+              </mat-list-item>
 
+              <mat-list-item style="margin-top: 1px;">
+                <button mat-button (click)="onVisits()" (click)="sidenav.toggle()" style="color: white;">
+                  <mat-icon style="margin-bottom: 4px;"> wysiwyg</mat-icon>
+                  Pokaż zakończone
+                </button>
+              </mat-list-item>
 
+              <mat-list-item style="margin-top: 1px;">
+                <button mat-button (click)="onUnconfirmedVisits()" (click)="sidenav.toggle()" style="color: white;">
+                  <mat-icon style="margin-bottom: 4px;"> new_releases</mat-icon>
+                  Pokaż niepotwierdzone
+                </button>
+              </mat-list-item>
 
-
-
-
-
-
-  
+              <mat-list-item style="padding-top: 20px;">
+                <button mat-button (click)="onLogOut()" style="color: #b8cef2;"> 
+                  <mat-icon>logout</mat-icon>
+                  Wyloguj się
+                </button>
+              </mat-list-item>
 
             </mat-list>
           </mat-nav-list>
@@ -183,12 +204,12 @@
                   
                   <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef class="table-element"> Id </th>
-                    <td mat-cell *matCellDef="let element" class="table-element"> {{element.id}} </td>
+                    <td mat-cell *matCellDef="let element" class="table-element"> {{element.id + "."}} </td>
                   </ng-container>
         
                   <ng-container matColumnDef="patient">
                     <th mat-header-cell *matHeaderCellDef class="table-element"> Pacjent </th>
-                    <td mat-cell *matCellDef="let element" class="table-element"> {{element.name + " " + element.surname}} </td>
+                    <td mat-cell *matCellDef="let element" class="table-element"> {{element.name[0] + "." + element.surname}} </td>
                   </ng-container>
           
                   <ng-container matColumnDef="age">
@@ -272,12 +293,12 @@
                 
                 <ng-container matColumnDef="id">
                   <th mat-header-cell *matHeaderCellDef class="table-element"> Id </th>
-                  <td mat-cell *matCellDef="let element" class="table-element"> {{element.id}} </td>
+                  <td mat-cell *matCellDef="let element" class="table-element"> {{element.id + "."}} </td>
                 </ng-container>
       
                 <ng-container matColumnDef="doctor">
                   <th mat-header-cell *matHeaderCellDef class="table-element"> Lekarz </th>
-                  <td mat-cell *matCellDef="let element" class="table-element"> {{element.name + " " + element.surname}} </td>
+                  <td mat-cell *matCellDef="let element" class="table-element"> {{element.name[0] + "." + element.surname}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="specialty">
@@ -392,62 +413,80 @@
           </mat-card> 
         </div>
 
-
-
+        <div *ngIf="loadVisits" style="min-width: 500px;">
+          <table mat-table [dataSource]="visits" class="mat-elevation-z8">
             
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Id </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.id + "."}} </td>
+            </ng-container>
   
-         <!-- <div *ngIf="loadNewVisitForm" fxLayoutAlign="center center" class="main-div">
-            <mat-card fxFlex="350px" style="margin-top: 30px; padding: auto;" >
+            <ng-container matColumnDef="patient">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Pacjent </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.patient.name[0] + "." + element.patient.surname}} </td>
+            </ng-container>
     
-              <form [formGroup]="newVisitForm" (ngSubmit)="onSubmitNewVisit()" fxLayoutAlign="streatch" fxLayout="column">
-                <mat-form-field class="example-full-width" appearance="fill" class="register-form">
-                  <mat-label>Pacjent</mat-label>
-                  <input type="text"
-                          placeholder="Wybierz"
-                          aria-label="Number"
-                          matInput
-                          [formControl]="newVisitControl"
-                          [matAutocomplete]="auto"
-                          formControlName="user" 
-                          required>
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                        {{option}}
-                      </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
+            <ng-container matColumnDef="doctor">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Lekarz </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.doctor.name[0] + "." + element.doctor.surname}} </td>
+            </ng-container>
     
-                <mat-form-field  class="example-full-width" appearance="fill">
-                  <input matInput placeholder="Gabinet *" type="number" formControlName="room" class="register-form" required>
-                </mat-form-field>
+            <ng-container matColumnDef="room">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Gabinet </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.room}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Data </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.dateAsString}} </td>
+            </ng-container> 
     
-                <mat-form-field class="example-full-width" appearance="fill" class="register-form">
-                  <input matInput [ngxMatDatetimePicker]="picker" placeholder="Wybierz datę *" formControlName="date" required>             
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>        
-                  <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
-                </mat-form-field>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsVisits"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsVisits;"></tr>
+          </table>
+        </div>
+
+        <div *ngIf="loadUnconfirmedVisits" style="min-width: 500px;">
+          <table mat-table [dataSource]="visitsUnconfirmed" class="mat-elevation-z8">
+            
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Id </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.id + "."}} </td>
+            </ng-container>
   
-                <mat-checkbox input type="checkbox" (change)="true" (change)="onCheckBox()" #checkBox class="register-form">
-                  Recepta
-                </mat-checkbox>
-  
-                <div *ngIf="checkBox.checked">
-                  <mat-form-field  class="example-full-width" appearance="fill">
-                    <input matInput placeholder="Nazwa leku *" type="text" formControlName="name" class="register-form" required>
-                  </mat-form-field>
-                  <mat-form-field  class="example-full-width" appearance="fill">
-                    <input matInput placeholder="Odpłata *" type="number" formControlName="payment" class="register-form" required>
-                  </mat-form-field>
-                </div>
-                
-                <div class="confirm-visit">
-                  <button mat-raised-button class="register-form" color="primary">
-                    Potwierdz
-                   </button>
-                </div>             
-              </form>
-            </mat-card> 
-          </div>-->
+            <ng-container matColumnDef="patient">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Pacjent </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.patient.name[0] + "." + element.patient.surname}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="doctor">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Lekarz </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.doctor.name[0] + "." + element.doctor.surname}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="room">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Gabinet </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.room}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Data </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> {{element.dateAsString}} </td>
+            </ng-container> 
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef class="table-element"> Status </th>
+              <td mat-cell *matCellDef="let element" class="table-element"> 
+                <button mat-icon-button (click)="onConfirmVisit(element.id)" color="primary" >
+                  <mat-icon>done</mat-icon>
+                </button>
+              </td>                     
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsVisitsUnconfirmed"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsVisitsUnconfirmed;"></tr>
+          </table>
+        </div>
   
         </mat-sidenav-content>
       </mat-sidenav-container>

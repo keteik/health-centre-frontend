@@ -217,32 +217,3 @@ export class PatientComponent implements OnInit{
   }
 
 }
-
-/*@Component({
-  selector: 'app-prescription',
-  templateUrl: './prescription.component.html',
-  styleUrls: ['./patient.component.css']
-})
-export class PrescriptionComponent {
-  constructor(public dialogRef: MatDialogRef<PrescriptionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private dataStream: DataStreamService
-    ) {}
-
-  dataPrescription: Prescription[] = [];
-  loadPrescription: boolean = false;
-  displayedColumns: string[] = ['id', 'name', 'payment', 'date'];
-
-  ngOnInit(): void {
-    const url = "http://localhost:5000/prescriptions/" + this.data.id;
-
-    if(this.dataPrescription.length === 0) {
-      this.dataStream.getPrescription(url).subscribe(results => {
-        this.dataPrescription = results;
-        this.loadPrescription = true;
-        window.scroll(0,0);
-      })
-    }
-  }
-}
-
-*/

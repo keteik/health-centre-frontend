@@ -11,6 +11,10 @@ type Visit = {
   doctor: {
     name: string;
     surname: string;
+  },
+  patient: {
+    name: string;
+    surname: string;
   }
 }
 
@@ -85,6 +89,18 @@ export class DataStreamService {
   }
 
   getUpcomingVisits(url: string): Observable<any> {
+    return this.http.get<Visit>(url).pipe(map((res: Visit) => {
+      return res;
+    }))
+  }
+
+  getCompletedVisits(url: string): Observable<any> {
+    return this.http.get<Visit>(url).pipe(map((res: Visit) => {
+      return res;
+    }))
+  }
+
+  getUnconfirmedVisits(url: string): Observable<any> {
     return this.http.get<Visit>(url).pipe(map((res: Visit) => {
       return res;
     }))

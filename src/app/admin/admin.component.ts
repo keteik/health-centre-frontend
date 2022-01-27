@@ -32,8 +32,17 @@ type Doctor = {
 type Visit = {
   id: number;
   date: Date;
+  dateAsString: string;
   room: number;
   status: number;
+  doctor: {
+    name: string;
+    surname: string;
+  },
+  patient: {
+    name: string;
+    surname: string
+  }
 }
 
 type Specialty = {
@@ -51,10 +60,13 @@ export class AdminComponent implements OnInit {
 
   loadPatients: boolean = false;
   loadDoctors: boolean = false;
+  loadVisits: boolean = false;
   loadNewPatientForm: boolean = false;
   loadNewDoctorForm: boolean = false;
   loadNewVisitForm: boolean = false;
   isSpecialitySelected: boolean = false;
+  loadUnconfirmedVisits: boolean = false;
+
 
   loadPrescription: boolean = false;
 
@@ -62,6 +74,7 @@ export class AdminComponent implements OnInit {
   doctors: Doctor[] = [];
   doctorsBySpecialty: Doctor[] = [];
   visits: Visit[] = [];
+  visitsUnconfirmed: Visit[] = [];
   specialties: Specialty[] = [];
 
   filteredOptionsSpecialty: Observable<string[]> | undefined;
@@ -75,7 +88,10 @@ export class AdminComponent implements OnInit {
   public newPatientForm = new FormGroup({
     name: new FormControl('', Validators.required),
     surname: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [
+      Validators.required, 
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+    ]),
     password: new FormControl('', Validators.required),
     phone: new FormControl('', Validators.required),
     pesel: new FormControl('', Validators.required),
@@ -86,7 +102,10 @@ export class AdminComponent implements OnInit {
   public newDoctorForm = new FormGroup({
     name: new FormControl('', Validators.required),
     surname: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [
+      Validators.required, 
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+    ]),
     password: new FormControl('', Validators.required),
     phone: new FormControl('', Validators.required),
     age: new FormControl('', Validators.required),
@@ -108,6 +127,8 @@ export class AdminComponent implements OnInit {
 
   displayedColumnsPatients: string[] = ['id', 'patient', 'age', 'gender', 'pesel', 'phone', 'status'];
   displayedColumnsDoctors: string[] = ['id', 'doctor', 'specialty', 'age', 'gender', 'phone', 'status'];
+  displayedColumnsVisits: string[] = ['id', 'patient', 'doctor', 'room', 'date'];
+  displayedColumnsVisitsUnconfirmed: string[] = ['id', 'patient', 'doctor', 'room', 'date', 'status'];
 
   
   constructor(private http: HttpClient, private _snackBar: MatSnackBar, private dataStream: DataStreamService, public dialog: MatDialog) { }
@@ -140,7 +161,9 @@ export class AdminComponent implements OnInit {
     this.loadNewDoctorForm = false;
     this.loadDoctors = false;
     this.loadNewVisitForm = false;
-  
+    this.loadVisits = false;
+    this.loadUnconfirmedVisits = false;
+
     const url = "http://localhost:5000/patients";
     
     if(this.patients.length === 0) {
@@ -160,6 +183,8 @@ export class AdminComponent implements OnInit {
     this.loadPatients = false;
     this.loadNewPatientForm = true;
     this.loadNewVisitForm = false;
+    this.loadVisits = false;
+    this.loadUnconfirmedVisits = false;
   }
 
   onNewPatientSubmit() {
@@ -230,6 +255,8 @@ export class AdminComponent implements OnInit {
     this.loadDoctors = false;
     this.loadNewDoctorForm = true;
     this.loadNewVisitForm = false;
+    this.loadVisits = false;
+    this.loadUnconfirmedVisits = false;
   }
 
   onNewDoctorSubmit() {
@@ -273,7 +300,9 @@ export class AdminComponent implements OnInit {
     this.loadPatients = false;
     this.loadNewDoctorForm = false;
     this.loadNewVisitForm = false;
-  
+    this.loadVisits = false;
+    this.loadUnconfirmedVisits = false;
+
     const url = "http://localhost:5000/doctors";
     
     if(this.doctors.length === 0) {
@@ -319,6 +348,8 @@ export class AdminComponent implements OnInit {
     this.loadNewPatientForm = false;
     this.loadDoctors = false;
     this.loadNewDoctorForm = false;
+    this.loadVisits = false;
+    this.loadUnconfirmedVisits = false;
 
     var patientLoaded: boolean = false;
     var specialtyLoaded: boolean = false;
@@ -446,9 +477,66 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  onEndedVisits() {
+  onVisits() {
 
+    this.loadNewDoctorForm = false;
+    this.loadDoctors = false;
+    this.loadPatients = false;
+    this.loadNewPatientForm = false;
+    this.loadNewVisitForm = false;
+    this.loadUnconfirmedVisits = false;
+    
+    const url = "http://localhost:5000/visits/completed";
+    
+    if(this.visits.length === 0) {
+      this.dataStream.getCompletedVisits(url).subscribe(results => {
+        this.visits = results;
+        for(let i = 0; i < this.visits.length; i++) {
+          this.visits[i].dateAsString = new Date(this.visits[i].date).toLocaleString()
+        }
+        this.loadVisits = true;
+      })
+    }
+    this.loadVisits = true;
+  }
+
+  onUnconfirmedVisits() {
+
+    this.loadNewDoctorForm = false;
+    this.loadDoctors = false;
+    this.loadPatients = false;
+    this.loadNewPatientForm = false;
+    this.loadNewVisitForm = false;
+    this.loadVisits = false;
+    
+    const url = "http://localhost:5000/visits/unconfirmed";
+    
+    if(this.visitsUnconfirmed.length === 0) {
+      this.dataStream.getUnconfirmedVisits(url).subscribe(results => {
+        this.visitsUnconfirmed = results;
+        for(let i = 0; i < this.visitsUnconfirmed.length; i++) {
+          this.visitsUnconfirmed[i].dateAsString = new Date(this.visitsUnconfirmed[i].date).toLocaleString()
+        }
+        this.loadUnconfirmedVisits = true;
+      })
+    }
+    this.loadUnconfirmedVisits = true;
+  }
+
+  onConfirmVisit(id: number) {
+    const data = {
+      type: "confirmVisit",
+      id: id
+    }
+  
+    this.dialog.open(EditDialogComponent, {
+      data: data,
+      width: '300px',
+      height: '190px'
+    });
   }
   
 
 }
+
+

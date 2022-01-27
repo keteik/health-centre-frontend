@@ -32,7 +32,7 @@ export class EditDialogComponent implements OnInit {
   loadDeletePatient: boolean = false;
   loadEditDoctor: boolean = false;
   loadDeleteDoctor: boolean = false;
-  loadEditVisit: boolean = false;
+  loadConfirmVisit: boolean = false;
 
 
   editPatientForm: any;
@@ -44,8 +44,8 @@ export class EditDialogComponent implements OnInit {
   ngOnInit(): void {
 
     switch(this.data.type) {
-      case "editVisit": {
-        this.loadEditVisit = true;
+      case "confirmVisit": {
+        this.loadConfirmVisit = true;
         break;
       }
       case "deleteVisit": {
@@ -164,6 +164,22 @@ export class EditDialogComponent implements OnInit {
       }).subscribe((data: any) => {
         if(data.status === "0"){
           this.openSnackBar("Lekarz usuniety !", 3);
+          window.location.reload();
+        } else {
+          this.openSnackBar(data.message, 3);
+        }
+      })
+  }
+
+  onConfirmVisitSubmit() {
+    const id: number = this.data.id;
+    const url = 'http://localhost:5000/visits';
+
+    this.http.put(url, {
+        id
+      }).subscribe((data: any) => {
+        if(data.status === "0"){
+          this.openSnackBar("Wizyta potwierdzona !", 3);
           window.location.reload();
         } else {
           this.openSnackBar(data.message, 3);

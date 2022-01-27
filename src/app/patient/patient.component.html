@@ -146,7 +146,7 @@
       </mat-sidenav>;
       <mat-sidenav-content fxFlexFill class="background">
 
-        <div *ngIf="loadVisit">
+        <div *ngIf="loadVisit" style="min-width: 500px;">
           <table mat-table [dataSource]="dataVisit" class="mat-elevation-z8">
             
             <ng-container matColumnDef="id">
