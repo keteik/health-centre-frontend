@@ -154,7 +154,9 @@ export class PatientComponent implements OnInit{
 
   onSpecialitySelect(){
     const specialty = this.newVisitForm.controls.specialty.value;
+
     const url = "http://localhost:5000/doctors";
+
 
     this.dataStream.getDoctorsBySpecialty(url, specialty).subscribe(results => {
       this.dataDoctor = results;

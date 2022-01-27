@@ -58,7 +58,16 @@
 
 .background {
   background-image: url('src/assets/background.jpg');
+  background-attachment: fixed;
+}
+
+.background-template {
+  background-image: url('src/assets/background.jpg');
+  background-attachment: fixed;
   background-size: cover;
+  height: unset !important;
+  min-height: 90% !important;
+
 }
 
 .example-card {

@@ -12,3 +12,17 @@
 .ref-element {
     font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
 }
+
+.background {
+    background-image: url('src/assets/background.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    height: unset !important;
+    min-height: 90% !important;
+  }
+
+  .background-toolbar {
+    background-image: url('src/assets/background.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+  }
