@@ -52,59 +52,34 @@ export class DataStreamService {
   constructor(private http: HttpClient) { }
 
   getVisitPatients(url: string): Observable<any> {
-    return this.http.get<Visit>(url).pipe(map((res: Visit) => {
-      return res;
-    }))
+    return this.http.get<Visit>(url).pipe(map((res: Visit) => { return res; }));
   }
 
   getPatients(url: string): Observable<any> {
-    return this.http.get<Patient>(url).pipe(map((res: Patient) => {
-      return res;
-    }))
-  }
-
-  getUserDetails(email: string, password: string) {
-    return this.http.post('http://localhost:5000/login', {
-      email,
-      password
-    });
+    return this.http.get<Patient>(url).pipe(map((res: Patient) => { return res; }));
   }
 
   getPrescription(url: string): Observable<any> {
-    return this.http.get<Prescription>(url).pipe(map((res:Prescription) => {
-      return res;
-    }))
+    return this.http.get<Prescription>(url).pipe(map((res:Prescription) => { return res; }));
   }
 
   getDoctors(url: string): Observable<any> {
-    return this.http.get<Doctor>(url).pipe(map((res: Doctor) => {
-      return res;
-    }))
+    return this.http.get<Doctor>(url).pipe(map((res: Doctor) => { return res; }));
   }
 
   getDoctorsBySpecialty(url: string, specialty: string): Observable<any> {
-    return this.http.post(url, {
-      specialty
-    });
+    return this.http.post(url, {specialty});
   }
 
   getUpcomingVisits(url: string): Observable<any> {
-    return this.http.get<Visit>(url).pipe(map((res: Visit) => {
-      return res;
-    }))
+    return this.http.get<Visit>(url).pipe(map((res: Visit) => { return res; }));
   }
 
   getCompletedVisits(url: string): Observable<any> {
-    return this.http.get<Visit>(url).pipe(map((res: Visit) => {
-      return res;
-    }))
+    return this.http.get<Visit>(url).pipe(map((res: Visit) => { return res; }));
   }
 
   getUnconfirmedVisits(url: string): Observable<any> {
-    return this.http.get<Visit>(url).pipe(map((res: Visit) => {
-      return res;
-    }))
+    return this.http.get<Visit>(url).pipe(map((res: Visit) => { return res; }));
   }
-  
-  
 }

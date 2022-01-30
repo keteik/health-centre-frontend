@@ -37,6 +37,8 @@ export class EditDialogComponent implements OnInit {
 
   editPatientForm: any;
   editDoctorForm: any;
+  confirmVisitForm: any;
+
 
   constructor(private _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) { }
@@ -45,6 +47,11 @@ export class EditDialogComponent implements OnInit {
 
     switch(this.data.type) {
       case "confirmVisit": {
+
+        this.confirmVisitForm = new FormGroup({
+          room: new FormControl('', Validators.required)
+        });
+
         this.loadConfirmVisit = true;
         break;
       }
@@ -175,16 +182,22 @@ export class EditDialogComponent implements OnInit {
     const id: number = this.data.id;
     const url = 'http://localhost:5000/visits';
 
-    this.http.put(url, {
-        id
+    if(this.confirmVisitForm.status !== "INVALID"){
+      const room = this.confirmVisitForm.controls.room.value;
+
+      this.http.put(url, {
+          id, room
       }).subscribe((data: any) => {
-        if(data.status === "0"){
-          this.openSnackBar("Wizyta potwierdzona !", 3);
-          window.location.reload();
-        } else {
-          this.openSnackBar(data.message, 3);
-        }
+          if(data.status === 1){
+            this.openSnackBar("Wizyta potwierdzona !", 3);
+            window.location.reload();
+          } else {
+            this.openSnackBar(data.message, 3);
+          }
       })
+    } else {
+      this.openSnackBar("Wypełnij wszytkie pola !", 3);
+    }
   }
 
   openSnackBar(message: string, duration: number) {

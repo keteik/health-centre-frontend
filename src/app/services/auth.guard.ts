@@ -16,14 +16,10 @@ export class AuthGuard implements CanActivate {
       if(!this.auth.isLoggedIn) {
         this.router.navigate(['login']);
       }
-
       const role = localStorage.getItem('role');
-
       if(role != route.routeConfig?.path){
         return this.router.navigate([role]);
       }
-
       return this.auth.loggedInStatus;
   }
-  
 }

@@ -1,5 +1,5 @@
 <div fxLayoutAlign="center center" class="main-div">
-    <mat-card *ngIf="loadEditPatient" fxFlex="350px" style="padding: auto; margin-top: 20px;" >
+    <mat-card *ngIf="loadEditPatient" fxFlex="300px" style="padding: auto; margin-top: 20px;" >
         <form [formGroup]="editPatientForm" (ngSubmit)="onEditPatientSubmit()" fxLayoutAlign="streatch" fxLayout="column" class="register-form">
             <mat-form-field>
                 <input matInput placeholder="Imię" type="text" formControlName="name" class="register-form" required>
@@ -40,7 +40,7 @@
         </div>
     </mat-card>
 
-    <mat-card *ngIf="loadEditDoctor" fxFlex="350px" style="padding: auto; margin-top: 20px;" >
+    <mat-card *ngIf="loadEditDoctor" fxFlex="300px" style="padding: auto; margin-top: 20px;" >
         <form [formGroup]="editDoctorForm" (ngSubmit)="onEditDoctorSubmit()" fxLayoutAlign="streatch" fxLayout="column" class="register-form">
             <mat-form-field>
                 <input matInput placeholder="Imię" type="text" formControlName="name" class="register-form" required>
@@ -81,18 +81,31 @@
         </div>
     </mat-card>
 
-    <mat-card *ngIf="loadConfirmVisit" fxFlex="280px" style="padding: auto; margin-top: 20px;" >
+    <mat-card *ngIf="loadConfirmVisit" fxFlex="280px" style="padding: auto;" >
         <div mat-dialog-actions class="title">
             <h1 class="ref-element">Na pewno potwierdzić ?</h1>
-          </div>
-        <div style="display: flex;justify-content: center; margin-top: 10px;">
-            <button mat-raised-button color="warn" mat-dialog-close >Anuluj</button>
-            <button mat-raised-button color="primary" (click)="onConfirmVisitSubmit()"  style="margin-left: 10px;">Potwierdz</button>
         </div>
+       
+        <form [formGroup]="confirmVisitForm" (ngSubmit)="onConfirmVisitSubmit()" fxLayoutAlign="streatch" fxLayout="column" class="register-form">
+            <mat-form-field>
+                <input matInput placeholder="Gabinet" type="number" formControlName="room" class="register-form" required>
+            </mat-form-field>
+
+            <div style="display: flex;justify-content: center; margin-top: 10px;">
+                <button mat-raised-button  color="warn" mat-dialog-close >Anuluj</button>
+
+                <button mat-raised-button color="primary" style="margin-left: 10px;" class="register-form">
+                    <mat-icon>edit</mat-icon>
+                    Potwierdz
+                </button>
+            </div>
+
+            
+        </form>
+
+        
     </mat-card>
 
-
-    
 
   </div>
 

@@ -113,7 +113,7 @@ export class PatientComponent implements OnInit{
     this.dialog.open(PrescriptionDialogComponent, {
       data: {id: id},
       width: '80%',
-      height: '90%'
+      height: '70%'
     });
   }
 
@@ -155,7 +155,7 @@ export class PatientComponent implements OnInit{
   onSpecialitySelect(){
     const specialty = this.newVisitForm.controls.specialty.value;
 
-    const url = "http://localhost:5000/doctors";
+    const url = "http://localhost:5000/doctors/by-specialty";
 
 
     this.dataStream.getDoctorsBySpecialty(url, specialty).subscribe(results => {

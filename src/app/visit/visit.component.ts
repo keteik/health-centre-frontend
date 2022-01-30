@@ -34,14 +34,14 @@ export class VisitComponent implements OnInit {
     if(!this.checked){
       this.newVisitForm.controls['name'].setValidators(Validators.required);
       this.newVisitForm.controls['payment'].setValidators(Validators.required);
+
       this.checked = true;
     } else {
       this.newVisitForm.controls['name'].clearValidators();
       this.newVisitForm.controls['name'].updateValueAndValidity();
-
       this.newVisitForm.controls['payment'].clearValidators();
       this.newVisitForm.controls['payment'].updateValueAndValidity();
-
+      
       this.checked = false;
     }
   }
@@ -69,7 +69,8 @@ export class VisitComponent implements OnInit {
       this.http.put('http://localhost:5000/visits', {
         id
       }).subscribe((data: any) => {
-        if(data.message === "success"){
+        console.log(data);
+        if(data.status === 2){
           this.openSnackBar("Wizyta zakończona", 3);
           window.location.reload();
         }

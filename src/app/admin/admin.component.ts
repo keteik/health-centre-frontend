@@ -128,7 +128,7 @@ export class AdminComponent implements OnInit {
   displayedColumnsPatients: string[] = ['id', 'patient', 'age', 'gender', 'pesel', 'phone', 'status'];
   displayedColumnsDoctors: string[] = ['id', 'doctor', 'specialty', 'age', 'gender', 'phone', 'status'];
   displayedColumnsVisits: string[] = ['id', 'patient', 'doctor', 'room', 'date'];
-  displayedColumnsVisitsUnconfirmed: string[] = ['id', 'patient', 'doctor', 'room', 'date', 'status'];
+  displayedColumnsVisitsUnconfirmed: string[] = ['id', 'patient', 'doctor', 'date', 'status'];
 
   
   constructor(private http: HttpClient, private _snackBar: MatSnackBar, private dataStream: DataStreamService, public dialog: MatDialog) { }
@@ -532,7 +532,7 @@ export class AdminComponent implements OnInit {
     this.dialog.open(EditDialogComponent, {
       data: data,
       width: '300px',
-      height: '190px'
+      height: '280px'
     });
   }
   

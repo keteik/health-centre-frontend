@@ -15,7 +15,10 @@ export class LoginComponent implements OnInit {
   constructor(private Auth: AuthService, private router: Router, private dataStream: DataStreamService, private _snackBar: MatSnackBar) {}
 
   public loginForm = new FormGroup({
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [
+      Validators.required,      
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+    ]),
     password: new FormControl('', Validators.required)
   })
 
@@ -23,23 +26,28 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    const email = this.loginForm.controls.email.value;
-    const password = this.loginForm.controls.password.value;
+    if(this.loginForm.status !== "INVALID"){
+      const email = this.loginForm.controls.email.value;
+      const password = this.loginForm.controls.password.value;
 
-    this.Auth.getUserDetails(email, password).
-    subscribe((data: any) => {
-      if(data.id) {
-        localStorage.setItem('role', data.role);
-        localStorage.setItem('name', data.name);
-        localStorage.setItem('surname', data.surname);
-        localStorage.setItem('id', data.id);
-        this.router.navigate([data.role]);
-        this.Auth.setIsLoggedIn(true);
-      }
-      else{
-        this.openSnackBar(data.message, 2);
-      }
-    });
+      this.Auth.getUserDetails(email, password).
+      subscribe((data: any) => {
+        if(data.id) {
+          localStorage.setItem('role', data.role);
+          localStorage.setItem('name', data.name);
+          localStorage.setItem('surname', data.surname);
+          localStorage.setItem('id', data.id);
+          this.router.navigate([data.role]);
+          this.Auth.setIsLoggedIn(true);
+        }
+        else{
+          this.openSnackBar(data.message, 2);
+        }
+      });
+    } else {
+      this.openSnackBar("Wypełnij poprawnie wszytkie pola !", 3);
+    }
+
   }
 
   onHome() {

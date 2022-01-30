@@ -99,20 +99,16 @@ export class DoctorComponent implements OnInit {
     this.loadVisit = true;  
   }
 
-  onPatient() {
+  onPatients() {
     this.loadVisit = false
     this.loadNewVisitForm = false;
     this.loadUpcomingVisit = false;
     const url = "http://localhost:5000/patients/doctor/" + localStorage.getItem('id');
     
-    if(this.dataPatient.length === 0) {
-      this.dataStream.getPatients(url).subscribe(results => {
-        this.dataPatient = results;
- 
-        this.loadPatient = true;
-      })
-    }
-    this.loadPatient = true;  
+    this.dataStream.getPatients(url).subscribe(results => {
+      this.dataPatient = results;
+      this.loadPatient = true;
+     })
   }
 
   openPrescriptionDialog(id: number) {
