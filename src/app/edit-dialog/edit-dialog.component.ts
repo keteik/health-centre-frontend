@@ -4,23 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-type Patient = {
-  id: number;
-  name: string;
-  surname: string;
-  phone: number;
-  pesel: number;
-  age: number;
-  gender: string;
-}
-
-type Visit = {
-  id: number;
-  date: Date;
-  room: number;
-  status: number;
-}
-
 @Component({
   selector: 'app-edit-dialog',
   templateUrl: './edit-dialog.component.html',

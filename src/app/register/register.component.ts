@@ -20,8 +20,10 @@ export class RegisterComponent implements OnInit {
     ]),
     password: new FormControl('', [ Validators.required, Validators.minLength(6)]),
     phone: new FormControl('', Validators.required),
-    pesel: new FormControl('', Validators.required),
-    age: new FormControl('', [ 
+    pesel: new FormControl('', [
+      Validators.min(11111111111),
+      Validators.max(99999999999)
+    ]),    age: new FormControl('', [ 
       Validators.required, 
       Validators.min(1), 
       Validators.max(130)
@@ -64,7 +66,7 @@ export class RegisterComponent implements OnInit {
           }
         });
     } else {
-      this.openSnackBar("Fill all fields", 2);
+      this.openSnackBar("Wypełnij wszystkie pola", 2);
     }
 }
 

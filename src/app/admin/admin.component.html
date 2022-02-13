@@ -21,11 +21,11 @@
                     <mat-menu #patientMenu="matMenu" xPosition="before">
                         <button mat-menu-item (click)="onNewPatient()" class="mat-button">
                             <mat-icon>person_add</mat-icon>
-                            Dodaj nowego
+                            Dodaj pacjenta
                         </button>
                         <button mat-menu-item (click)="onPatients()" class="mat-button">
                             <mat-icon>table_chart</mat-icon>
-                            Pokaż wszystkich
+                            Pokaż pacjentów
                         </button>
                     </mat-menu>
 
@@ -36,11 +36,11 @@
                   <mat-menu #doctorMenu="matMenu" xPosition="before">
                       <button mat-menu-item (click)="onNewDoctor()" class="mat-button">
                           <mat-icon>person_add</mat-icon>
-                          Dodaj nowego
+                          Dodaj lekarza
                       </button>
                       <button mat-menu-item (click)="onDoctors()" class="mat-button">
                           <mat-icon>table_chart</mat-icon>
-                          Pokaż wszystkich
+                          Pokaż lekarzy
                       </button>
                   </mat-menu>
 
@@ -51,7 +51,7 @@
                 <mat-menu #visitMenu="matMenu" xPosition="before">
                     <button mat-menu-item (click)="onNewVisit()" class="mat-button">
                         <mat-icon>add_box</mat-icon>
-                        Dodaj nową
+                        Dodaj
                     </button>
                     <button mat-menu-item (click)="onVisits()" class="mat-button">
                         <mat-icon>wysiwyg</mat-icon>
@@ -187,8 +187,8 @@
                             <input matInput placeholder="Wiek" type="number" formControlName="age" class="register-form" required>
                         </mat-form-field>
                         <mat-radio-group formControlName="gender" required class="register-form" style="padding-bottom: 20px;" >
-                            <mat-radio-button value="male">Mężczyzna</mat-radio-button>
-                            <mat-radio-button value="female" style="margin-left: 10px;">Kobieta</mat-radio-button>
+                            <mat-radio-button value="M">Mężczyzna</mat-radio-button>
+                            <mat-radio-button value="K" style="margin-left: 10px;">Kobieta</mat-radio-button>
                         </mat-radio-group>
                         <button mat-raised-button color="primary" class="register-form">
                             <mat-icon>person_add</mat-icon>
@@ -235,10 +235,14 @@
                   <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef class="table-element"> Status </th>
                     <td mat-cell *matCellDef="let element" class="table-element"> 
-                      <button mat-icon-button (click)="onEditPatient(element)" color="primary" >
+                      <button mat-icon-button 
+                      (click)="onEditPatient(element)" 
+                      color="primary" >
                         <mat-icon>edit</mat-icon>
                       </button>
-                      <button mat-icon-button (click)="onDeletePatient(element.id)" color="primary" >
+                      <button mat-icon-button 
+                        (click)="onDeletePatient(element.id)" 
+                        color="primary" >
                         <mat-icon>delete</mat-icon>
                       </button>
                     </td>                     

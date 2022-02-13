@@ -13,7 +13,7 @@ type Patient = {
   name: string;
   surname: string;
   phone: number;
-  pesel: number;
+  pesel: string;
   age: number;
   gender: string;
 }
@@ -23,7 +23,7 @@ type Doctor = {
   name: string;
   surname: string;
   phone: number;
-  pesel: number;
+  pesel: string;
   age: number;
   gender: string;
   specialty: string
@@ -92,10 +92,17 @@ export class AdminComponent implements OnInit {
       Validators.required, 
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
     ]),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [ Validators.required, Validators.minLength(6)]),
     phone: new FormControl('', Validators.required),
-    pesel: new FormControl('', Validators.required),
-    age: new FormControl('', Validators.required),
+    pesel: new FormControl('', [
+      Validators.min(11111111111),
+      Validators.max(99999999999)
+    ]),
+    age: new FormControl('', [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(130)
+    ]),
     gender: new FormControl('', Validators.required),
   });
 
@@ -106,9 +113,13 @@ export class AdminComponent implements OnInit {
       Validators.required, 
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
     ]),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [ Validators.required, Validators.minLength(6)]),
     phone: new FormControl('', Validators.required),
-    age: new FormControl('', Validators.required),
+    age: new FormControl('', [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(130)
+    ]),
     gender: new FormControl('', Validators.required),
     specialty: new FormControl('', Validators.required)
   });
@@ -218,7 +229,7 @@ export class AdminComponent implements OnInit {
           }
         });
     } else {
-      this.openSnackBar("Fill all fields", 2);
+      this.openSnackBar("Wypełnij wysztkie pola !", 2);
     }
   }
 
@@ -291,7 +302,7 @@ export class AdminComponent implements OnInit {
           }
         });
     } else {
-      this.openSnackBar("Fill all fields", 2);
+      this.openSnackBar("Wypełnij wszystkie pola !", 2);
     }
   }
 
@@ -416,7 +427,7 @@ export class AdminComponent implements OnInit {
 
   onSpecialitySelect() {
     const specialty = this.newVisitForm.controls.specialty.value;
-    const url = "http://localhost:5000/doctors";
+    const url = "http://localhost:5000/doctors/by-specialty";
 
     this.dataStream.getDoctorsBySpecialty(url, specialty).subscribe(results => {
       this.doctorsBySpecialty = results;
@@ -492,7 +503,7 @@ export class AdminComponent implements OnInit {
       this.dataStream.getCompletedVisits(url).subscribe(results => {
         this.visits = results;
         for(let i = 0; i < this.visits.length; i++) {
-          this.visits[i].dateAsString = new Date(this.visits[i].date).toLocaleString()
+          this.visits[i].dateAsString = new Date(this.visits[i].date).toLocaleString();
         }
         this.loadVisits = true;
       })
